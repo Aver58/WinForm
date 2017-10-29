@@ -19,7 +19,7 @@ namespace Aver3
         //}
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Init();
+           // this.Init();
         }
     }
 }

@@ -50,7 +50,7 @@ namespace Aver3
         [STAThread]
         static void Main()
         {
-            #region
+#region CMD尝试
             /*
 #if DEBUG
             AllocConsole();

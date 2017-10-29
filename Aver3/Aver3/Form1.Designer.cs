@@ -56,10 +56,10 @@
             // angel
             // 
             this.angel.AutoSize = true;
-            this.angel.Font = new System.Drawing.Font("苹方 中等", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.angel.Location = new System.Drawing.Point(12, 51);
+            this.angel.Font = new System.Drawing.Font("苹方 中等", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.angel.Location = new System.Drawing.Point(94, 44);
             this.angel.Name = "angel";
-            this.angel.Size = new System.Drawing.Size(90, 22);
+            this.angel.Size = new System.Drawing.Size(112, 28);
             this.angel.TabIndex = 3;
             this.angel.Text = "cmd模拟器";
             // 
@@ -77,10 +77,10 @@
             this.webBrowser1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.webBrowser1.Location = new System.Drawing.Point(350, 24);
+            this.webBrowser1.Location = new System.Drawing.Point(350, 51);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(419, 403);
+            this.webBrowser1.Size = new System.Drawing.Size(419, 376);
             this.webBrowser1.TabIndex = 9;
             // 
             // comboBox1
@@ -90,14 +90,14 @@
             "http://con.monyun.cn:9960/portalpage/por_experience.html?prs=skbguXQA&b_scene_zt=" +
                 "1&iden=1274108362044736399",
             "www.baidu.com"});
-            this.comboBox1.Location = new System.Drawing.Point(14, 24);
+            this.comboBox1.Location = new System.Drawing.Point(419, 12);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(233, 20);
             this.comboBox1.TabIndex = 10;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(253, 24);
+            this.button2.Location = new System.Drawing.Point(681, 12);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 20);
             this.button2.TabIndex = 11;
@@ -108,7 +108,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(348, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 12;
@@ -152,7 +152,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(253, 289);
+            this.button3.Location = new System.Drawing.Point(12, 373);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 17;
