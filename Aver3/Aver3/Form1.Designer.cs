@@ -30,16 +30,22 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.angel = new System.Windows.Forms.Label();
-            this.level = new System.Windows.Forms.Label();
-            this.maxLevel = new System.Windows.Forms.Label();
-            this.maxAngle = new System.Windows.Forms.Label();
+            this.Screen = new System.Windows.Forms.TextBox();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.command = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.param = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.console = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(151, 278);
+            this.button1.Location = new System.Drawing.Point(253, 50);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -50,72 +56,140 @@
             // angel
             // 
             this.angel.AutoSize = true;
-            this.angel.Location = new System.Drawing.Point(12, 9);
+            this.angel.Font = new System.Drawing.Font("苹方 中等", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.angel.Location = new System.Drawing.Point(12, 51);
             this.angel.Name = "angel";
-            this.angel.Size = new System.Drawing.Size(41, 12);
+            this.angel.Size = new System.Drawing.Size(90, 22);
             this.angel.TabIndex = 3;
-            this.angel.Text = "label1";
+            this.angel.Text = "cmd模拟器";
             // 
-            // level
+            // Screen
             // 
-            this.level.AutoSize = true;
-            this.level.Location = new System.Drawing.Point(12, 68);
-            this.level.Name = "level";
-            this.level.Size = new System.Drawing.Size(41, 12);
-            this.level.TabIndex = 4;
-            this.level.Text = "label1";
+            this.Screen.Location = new System.Drawing.Point(12, 123);
+            this.Screen.Multiline = true;
+            this.Screen.Name = "Screen";
+            this.Screen.Size = new System.Drawing.Size(316, 160);
+            this.Screen.TabIndex = 8;
+            this.Screen.Text = "请输入命令";
             // 
-            // maxLevel
+            // webBrowser1
             // 
-            this.maxLevel.AutoSize = true;
-            this.maxLevel.Location = new System.Drawing.Point(12, 125);
-            this.maxLevel.Name = "maxLevel";
-            this.maxLevel.Size = new System.Drawing.Size(41, 12);
-            this.maxLevel.TabIndex = 5;
-            this.maxLevel.Text = "label1";
+            this.webBrowser1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.webBrowser1.Location = new System.Drawing.Point(350, 24);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(419, 403);
+            this.webBrowser1.TabIndex = 9;
             // 
-            // maxAngle
+            // comboBox1
             // 
-            this.maxAngle.AutoSize = true;
-            this.maxAngle.Location = new System.Drawing.Point(12, 185);
-            this.maxAngle.Name = "maxAngle";
-            this.maxAngle.Size = new System.Drawing.Size(41, 12);
-            this.maxAngle.TabIndex = 6;
-            this.maxAngle.Text = "label1";
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "http://con.monyun.cn:9960/portalpage/por_experience.html?prs=skbguXQA&b_scene_zt=" +
+                "1&iden=1274108362044736399",
+            "www.baidu.com"});
+            this.comboBox1.Location = new System.Drawing.Point(14, 24);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(233, 20);
+            this.comboBox1.TabIndex = 10;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(253, 24);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 20);
+            this.button2.TabIndex = 11;
+            this.button2.Text = "Go";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(184, 8);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 12);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "请输入网站";
             // 
-            // textBox1
+            // command
             // 
-            this.textBox1.Location = new System.Drawing.Point(117, 42);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(316, 204);
-            this.textBox1.TabIndex = 8;
-            this.textBox1.Text = "";
-          
+            this.command.Location = new System.Drawing.Point(73, 79);
+            this.command.Multiline = true;
+            this.command.Name = "command";
+            this.command.Size = new System.Drawing.Size(111, 23);
+            this.command.TabIndex = 13;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(12, 82);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 14);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Command";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(190, 82);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(42, 14);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "param";
+            // 
+            // param
+            // 
+            this.param.Location = new System.Drawing.Point(238, 79);
+            this.param.Multiline = true;
+            this.param.Name = "param";
+            this.param.Size = new System.Drawing.Size(90, 23);
+            this.param.TabIndex = 16;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(253, 289);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 17;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // console
+            // 
+            this.console.Location = new System.Drawing.Point(12, 402);
+            this.console.Multiline = true;
+            this.console.Name = "console";
+            this.console.Size = new System.Drawing.Size(316, 25);
+            this.console.TabIndex = 18;
+            this.console.Text = "请输入命令";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(445, 313);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(781, 439);
+            this.Controls.Add(this.console);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.param);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.command);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.maxAngle);
-            this.Controls.Add(this.maxLevel);
-            this.Controls.Add(this.level);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.webBrowser1);
+            this.Controls.Add(this.Screen);
             this.Controls.Add(this.angel);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "浏览器";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,11 +199,17 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label angel;
-        private System.Windows.Forms.Label level;
-        private System.Windows.Forms.Label maxLevel;
-        private System.Windows.Forms.Label maxAngle;
+        private System.Windows.Forms.TextBox Screen;
+        private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox command;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox param;
+        private System.Windows.Forms.Button button3;
+        public System.Windows.Forms.TextBox console;
     }
 }
 
