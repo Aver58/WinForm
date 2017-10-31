@@ -32,7 +32,7 @@ namespace Aver3
         private void button1_Click(object sender, EventArgs e)
         {
             
-            console.Text = Name;
+            console.Text = "";
 
             #region 读取文件
             /*
