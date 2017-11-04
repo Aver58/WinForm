@@ -15,10 +15,12 @@ using System.Threading;
 namespace Aver3
 {
 
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
+        string address = "E:";
+        bool Round = false;
         //窗体界面的初始化
-        public Form1()
+        public Main()
         {
             InitializeComponent();
         }
@@ -28,12 +30,10 @@ namespace Aver3
             comboBox1.SelectedIndex = 0;//默认选择第一个
             webBrowser1.GoHome();//浏览器默认主页
         }
-
+        #region ButtonStudy
         private void button1_Click(object sender, EventArgs e)
         {
-            
             console.Text = "";
-            //!!!!
             #region 读取文件
             /*
             label1.Text = Application.StartupPath + @"\data\111.txt";
@@ -86,12 +86,37 @@ namespace Aver3
             //异常检测结束
             */
             #endregion
-
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
             webBrowser1.Navigate(comboBox1.SelectedItem.ToString());
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //RunCmd(command.Text, param.Text);
+            //RunCmd2(command.Text, param.Text);
+            #region GetByte
+            UnicodeEncoding unicode = new UnicodeEncoding();
+            byte[] first = unicode.GetBytes("一起摇摆");//将汉字字符转化为BYTE数组
+            MemoryStream ms = new MemoryStream(2);
+            ms.Write(first, 0, first.Length);
+            //console.Text = ms.Capacity.ToString() + "||" + ms.Length.ToString();
+            #endregion
+            #region FileStream
+            string filePath = "1.txt";
+            string str = "555";
+
+            try
+            {
+                //FileStream fs = new FileStream(filePath, FileMode.Create);//实例化
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            #endregion
         }
         private void WebBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
@@ -249,32 +274,99 @@ namespace Aver3
             return result;
         }*/
         #endregion
-        private void button3_Click(object sender, EventArgs e)
+
+        #endregion
+        #region MenuTool
+        //LoadIni读取INI文件，并将信息载入菜单
+        void LoadIni()
         {
-            //RunCmd(command.Text, param.Text);
-            //RunCmd2(command.Text, param.Text);
-            #region GetByte
-            UnicodeEncoding unicode = new UnicodeEncoding();
-            byte[] first = unicode.GetBytes("一起摇摆");//将汉字字符转化为BYTE数组
-            MemoryStream ms = new MemoryStream(2);
-            ms.Write(first, 0, first.Length);
-            //console.Text = ms.Capacity.ToString() + "||" + ms.Length.ToString();
-            #endregion
-            #region FileStream
-            string filePath = "1.txt";
-            string str = "555";
-            
+            StreamReader sr = new StreamReader(address + "\\Menu.ini");
+            int i = Menu1.DropDownItems.Count - 1;//从第2个开始载入 
+            while (sr.Peek() >= 0) //sr.Peek()返回下一个可用字符，但不使用它
+            {
+                //StreamReader ReadLine从当前流中读取一行字符，并将数据作为字符串返回
+                ToolStripMenuItem menuItem = new ToolStripMenuItem(sr.ReadLine());
+                if (menuItem == null)//还是有
+                {
+                    sr.Close();
+                    return;
+                }
+                Menu1.DropDownItems.Insert(i, menuItem);
+                i++;
+                menuItem.Click += new EventHandler(NewClick);
+            }
+            sr.Close();
+        }
+        //Ini文件中对应的点击事件
+        void NewClick(object sender, EventArgs e)
+        {
+            ToolStripMenuItem menu = (ToolStripMenuItem)sender;
+            ShowWindows(menu.Text);//打开对应的窗口
+        }
+        void ShowWindows(string s)
+        {
+            if (s == null)
+            {
+                return;
+            }
+            Form f = new Form();
+            f.MdiParent = this;
+            f.Show();
+        }
+        private void MenuItem_Click(object sender, EventArgs e)
+        {
+            LoadIni();
+            //ShowWindows(openFileDialog1.FileName);
+        }
+        private void 打开ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                StreamReader sr = new StreamReader(address + "\\Menu.ini");
+                //如果没打开文件，就不写入//如果有了就不写入
+                if (openFileDialog1.FileName == "" || sr.ReadLine() == openFileDialog1.FileName)
+                {
+                    sr.Close();
+                    return;
+                }
+                Screen.Text = openFileDialog1.FileName;
+                StreamWriter sw = new StreamWriter(address + "\\Menu.ini", true);
+                sw.WriteLine(openFileDialog1.FileName);//写入INI
+                sw.Flush();
+                sw.Close();
+                sr.Close();
+            }
+        }
+        private void 关闭ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        #endregion
+        protected void textBox1_Validating(object sender,CancelEventArgs e)
+        {
             try
             {
-                FileStream fs = new FileStream(filePath, FileMode.Create);//实例化
-
+                int x = Int32.Parse(Screen.Text);
+                errorProvider1.SetError(textBox1, "");
             }
-            catch (Exception)
+            catch (Exception de)
             {
-
-                throw;
+                errorProvider1.SetError(textBox1, "Not an integer value.");
             }
-            #endregion
         }
+       
+        #region Paint
+        private void Main_Paint(object sender, PaintEventArgs e)
+        {
+            if (Round)
+            {
+                System.Drawing.Drawing2D.GraphicsPath firstPath = new System.Drawing.Drawing2D.GraphicsPath();
+                firstPath.AddEllipse(30, 30, this.Width - 40, this.Height - 40);
+                ShowWindows(openFileDialog1.FileName);
+                this.Region = new Region(firstPath);
+            }
+        }
+        #endregion
+
     }
 }

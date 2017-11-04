@@ -1,6 +1,6 @@
 ﻿namespace Aver3
 {
-    partial class Form1
+    partial class Main
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.angel = new System.Windows.Forms.Label();
             this.Screen = new System.Windows.Forms.TextBox();
@@ -41,6 +42,15 @@
             this.param = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.console = new System.Windows.Forms.TextBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.Menu1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.打开ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.关闭ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -56,16 +66,16 @@
             // angel
             // 
             this.angel.AutoSize = true;
-            this.angel.Font = new System.Drawing.Font("苹方 中等", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.angel.Location = new System.Drawing.Point(94, 44);
+            this.angel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.angel.Location = new System.Drawing.Point(98, 48);
             this.angel.Name = "angel";
-            this.angel.Size = new System.Drawing.Size(112, 28);
+            this.angel.Size = new System.Drawing.Size(109, 25);
             this.angel.TabIndex = 3;
             this.angel.Text = "cmd模拟器";
             // 
             // Screen
             // 
-            this.Screen.Location = new System.Drawing.Point(12, 123);
+            this.Screen.Location = new System.Drawing.Point(12, 108);
             this.Screen.Multiline = true;
             this.Screen.Name = "Screen";
             this.Screen.Size = new System.Drawing.Size(316, 160);
@@ -90,14 +100,14 @@
             "http://con.monyun.cn:9960/portalpage/por_experience.html?prs=skbguXQA&b_scene_zt=" +
                 "1&iden=1274108362044736399",
             "www.baidu.com"});
-            this.comboBox1.Location = new System.Drawing.Point(419, 12);
+            this.comboBox1.Location = new System.Drawing.Point(419, 28);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(233, 20);
             this.comboBox1.TabIndex = 10;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(681, 12);
+            this.button2.Location = new System.Drawing.Point(682, 25);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 20);
             this.button2.TabIndex = 11;
@@ -108,7 +118,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(348, 15);
+            this.label1.Location = new System.Drawing.Point(348, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 12;
@@ -152,9 +162,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 373);
+            this.button3.Location = new System.Drawing.Point(253, 402);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(75, 27);
             this.button3.TabIndex = 17;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
@@ -165,15 +175,66 @@
             this.console.Location = new System.Drawing.Point(12, 402);
             this.console.Multiline = true;
             this.console.Name = "console";
-            this.console.Size = new System.Drawing.Size(316, 25);
+            this.console.Size = new System.Drawing.Size(232, 25);
             this.console.TabIndex = 18;
             this.console.Text = "请输入命令";
             // 
-            // Form1
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Menu1});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(781, 25);
+            this.menuStrip1.TabIndex = 19;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // Menu1
+            // 
+            this.Menu1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.打开ToolStripMenuItem,
+            this.关闭ToolStripMenuItem});
+            this.Menu1.Name = "Menu1";
+            this.Menu1.Size = new System.Drawing.Size(53, 21);
+            this.Menu1.Text = "Menu";
+            this.Menu1.Click += new System.EventHandler(this.MenuItem_Click);
+            // 
+            // 打开ToolStripMenuItem
+            // 
+            this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
+            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.打开ToolStripMenuItem.Text = "打开";
+            this.打开ToolStripMenuItem.Click += new System.EventHandler(this.打开ToolStripMenuItem_Click);
+            // 
+            // 关闭ToolStripMenuItem
+            // 
+            this.关闭ToolStripMenuItem.Name = "关闭ToolStripMenuItem";
+            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.关闭ToolStripMenuItem.Text = "关闭";
+            this.关闭ToolStripMenuItem.Click += new System.EventHandler(this.关闭ToolStripMenuItem_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(12, 293);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.TabIndex = 21;
+            // 
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(781, 439);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.console);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.param);
@@ -187,9 +248,17 @@
             this.Controls.Add(this.Screen);
             this.Controls.Add(this.angel);
             this.Controls.Add(this.button1);
-            this.Name = "Form1";
+            this.Controls.Add(this.menuStrip1);
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.IsMdiContainer = true;
+            this.MainMenuStrip = this.menuStrip1;
+            this.Name = "Main";
             this.Text = "浏览器";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Main_Paint);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,6 +279,13 @@
         private System.Windows.Forms.TextBox param;
         private System.Windows.Forms.Button button3;
         public System.Windows.Forms.TextBox console;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem Menu1;
+        private System.Windows.Forms.ToolStripMenuItem 打开ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 关闭ToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
