@@ -33,7 +33,7 @@ namespace Aver3
         {
             
             console.Text = "";
-
+            //!!!!
             #region 读取文件
             /*
             label1.Text = Application.StartupPath + @"\data\111.txt";
