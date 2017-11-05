@@ -1,24 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Diagnostics;
-using System.Threading;
-
 namespace Aver3
 {
-
     public partial class Main : Form
     {
-        string address = "E:";
-        bool Round = false;
+        string address = "D:";//保存文件路径
+        bool Round = false;//界面按钮测试
         //窗体界面的初始化
         public Main()
         {
@@ -27,8 +19,7 @@ namespace Aver3
         //窗体程序的初始化Init
         private void Form1_Load(object sender, EventArgs e)
         {
-            comboBox1.SelectedIndex = 0;//默认选择第一个
-            webBrowser1.GoHome();//浏览器默认主页
+           
         }
         #region ButtonStudy
         private void button1_Click(object sender, EventArgs e)
@@ -87,213 +78,37 @@ namespace Aver3
             */
             #endregion
         }
-        private void button2_Click(object sender, EventArgs e)
-        {
-            webBrowser1.Navigate(comboBox1.SelectedItem.ToString());
-        }
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //RunCmd(command.Text, param.Text);
-            //RunCmd2(command.Text, param.Text);
-            #region GetByte
-            UnicodeEncoding unicode = new UnicodeEncoding();
-            byte[] first = unicode.GetBytes("一起摇摆");//将汉字字符转化为BYTE数组
-            MemoryStream ms = new MemoryStream(2);
-            ms.Write(first, 0, first.Length);
-            //console.Text = ms.Capacity.ToString() + "||" + ms.Length.ToString();
-            #endregion
-            #region FileStream
-            string filePath = "1.txt";
-            string str = "555";
-
-            try
-            {
-                //FileStream fs = new FileStream(filePath, FileMode.Create);//实例化
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            #endregion
-        }
-        private void WebBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            ////下面是你的执行操作代码
-            //try
-            //{
-            //    textBox1.Text = webBrowser1.Document.GetElementById("password").ToString();
-            //    webBrowser1.Document.GetElementById("password").SetAttribute("value", "Welcome123");
-
-            //}
-            //catch (Exception m)
-            //{
-            //    MessageBox.Show(m.ToString());
-            //    return;
-            //}
-        }
-        #region RunCmd
-        /// <summary>
-        /// 运行cmd命令
-        /// 不显示命令窗口
-        /// </summary>
-        /// <param name="cmdExe">指定应用程序的完整路径</param>
-        /// <param name="cmdStr">执行命令行参数</param>
-        bool RunCmd(string cmdExe, string cmdStr)
-        {
-            bool result = false;
-            try
-            {
-                using (Process cmd = new Process())
-                {
-                    cmd.StartInfo.FileName = "cmd.exe";//设置运行的命令行文件问ping.exe文件，这个文件系统会自己找到
-                                                       //如果是其它exe文件，则有可能需要指定详细路径，如运行winRar.exe
-                    cmd.StartInfo.UseShellExecute = false;
-                    cmd.StartInfo.RedirectStandardInput = true; //接受来自调用程序的输入信息
-                    cmd.StartInfo.RedirectStandardOutput = true;//由调用程序获取输出信息
-                    cmd.StartInfo.RedirectStandardError = true; //重定向标准错误输出
-                    cmd.StartInfo.CreateNoWindow = true;        //不显示程序窗口
-                    cmd.StartInfo.UseShellExecute = false;//是否指定操作系统外壳进程启动程序
-                    //cmd.Arguments = command.Text;//设置命令参数  
-                    cmd.Start();
-                    //如果调用程序路径中有空格时，cmd命令执行失败，可以用双引号括起来 ，在这里两个引号表示一个引号（转义）
-                    string str = string.Format(@"""{0}"" {1} {2}", cmdExe, cmdStr, "&exit");
-                    StreamReader reader = cmd.StandardOutput;//截取输出流
-                    string line = reader.ReadLine();//每次读取一行
-                    while (!reader.EndOfStream)
-                    {
-                        Screen.AppendText("\r\n " + line);
-                        line = reader.ReadLine();
-                    }
-                    //cmd.StandardInput.AutoFlush = true;
-                    cmd.WaitForExit();//等待程序执行完退出进程
-                    cmd.Close();//关闭进程
-                    reader.Close();//关闭流
-                    result = true;
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.ToString());
-            }
-            return result;
-        }
-        /// <summary>
-        /// 运行cmd命令
-        /// 会显示命令窗口
-        /// </summary>
-        /// <param name="cmdExe">指定应用程序的完整路径</param>
-        /// <param name="cmdStr">执行命令行参数</param>
-        static bool RunCmd2(string cmdExe, string cmdStr)
-        {
-            bool result = false;
-            try
-            {
-                using (Process myPro = new Process())
-                {
-                    //指定启动进程是调用的应用程序和命令行参数
-                    ProcessStartInfo psi = new ProcessStartInfo(cmdExe, cmdStr);
-                    myPro.StartInfo = psi;
-                    myPro.Start();
-                    myPro.WaitForExit();
-                    result = true;
-                }
-            }
-            catch
-            {
-
-            }
-            return result;
-        }
-        #endregion
-        #region RUNcmd-Original
-        /*
-        /// <summary>
-        /// 运行cmd命令
-        /// 会显示命令窗口
-        /// </summary>
-        /// <param name="cmdExe">指定应用程序的完整路径</param>
-        /// <param name="cmdStr">执行命令行参数</param>
-        static bool RunCmd(string cmdExe, string cmdStr)
-        {
-            bool result = false;
-            try
-            {
-                using (Process myPro = new Process())
-                {
-                    //指定启动进程是调用的应用程序和命令行参数
-                    ProcessStartInfo psi = new ProcessStartInfo(cmdExe, cmdStr);
-                    myPro.StartInfo = psi;
-                    myPro.Start();
-                    myPro.WaitForExit();
-                    result = true;
-                }
-            }
-            catch
-            {
-
-            }
-            return result;
-        }
-
-        /// <summary>
-        /// 运行cmd命令
-        /// 不显示命令窗口
-        /// </summary>
-        /// <param name="cmdExe">指定应用程序的完整路径</param>
-        /// <param name="cmdStr">执行命令行参数</param>
-        static bool RunCmd2(string cmdExe, string cmdStr)
-        {
-            bool result = false;
-            try
-            {
-                using (Process myPro = new Process())
-                {
-                    myPro.StartInfo.FileName = "cmd.exe";
-                    myPro.StartInfo.UseShellExecute = false;
-                    myPro.StartInfo.RedirectStandardInput = true;
-                    myPro.StartInfo.RedirectStandardOutput = true;
-                    myPro.StartInfo.RedirectStandardError = true;
-                    myPro.StartInfo.CreateNoWindow = true;
-                    myPro.Start();
-                    //如果调用程序路径中有空格时，cmd命令执行失败，可以用双引号括起来 ，在这里两个引号表示一个引号（转义）
-                    string str = string.Format(@"""{0}"" {1} {2}", cmdExe, cmdStr, "&exit");
-
-                    myPro.StandardInput.WriteLine(str);
-                    myPro.StandardInput.AutoFlush = true;
-                    myPro.WaitForExit();
-
-                    result = true;
-                }
-            }
-            catch
-            {
-
-            }
-            return result;
-        }*/
-        #endregion
+       
 
         #endregion
         #region MenuTool
         //LoadIni读取INI文件，并将信息载入菜单
         void LoadIni()
         {
+            StreamWriter sw = new StreamWriter(address + "\\Menu.ini", true);
+            sw.Flush();
+            sw.Close();
             StreamReader sr = new StreamReader(address + "\\Menu.ini");
             int i = Menu1.DropDownItems.Count - 1;//从第2个开始载入 
             while (sr.Peek() >= 0) //sr.Peek()返回下一个可用字符，但不使用它
             {
                 //StreamReader ReadLine从当前流中读取一行字符，并将数据作为字符串返回
                 ToolStripMenuItem menuItem = new ToolStripMenuItem(sr.ReadLine());
-                if (menuItem == null)//还是有
+                foreach (var item in Menu1.DropDownItems)//todo 判断有问题
                 {
-                    sr.Close();
-                    return;
+                    if (item.ToString()== sr.ReadLine()||sr.ReadLine()==null)
+                    {
+                        //Screen.Text += item.ToString()+ "\r\n";
+                        return;
+                    }
+                    else
+                    {
+                        Menu1.DropDownItems.Insert(i, menuItem);
+                        i++;
+                        menuItem.Click += new EventHandler(NewClick);
+                        break;
+                    }
                 }
-                Menu1.DropDownItems.Insert(i, menuItem);
-                i++;
-                menuItem.Click += new EventHandler(NewClick);
             }
             sr.Close();
         }
@@ -323,18 +138,19 @@ namespace Aver3
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 StreamReader sr = new StreamReader(address + "\\Menu.ini");
-                //如果没打开文件，就不写入//如果有了就不写入
+                //如果没打开文件，就不写入||如果有了就不写入
                 if (openFileDialog1.FileName == "" || sr.ReadLine() == openFileDialog1.FileName)
                 {
                     sr.Close();
                     return;
                 }
-                Screen.Text = openFileDialog1.FileName;
+                
+                sr.Close();
                 StreamWriter sw = new StreamWriter(address + "\\Menu.ini", true);
                 sw.WriteLine(openFileDialog1.FileName);//写入INI
                 sw.Flush();
                 sw.Close();
-                sr.Close();
+               
             }
         }
         private void 关闭ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -346,12 +162,14 @@ namespace Aver3
         {
             try
             {
-                int x = Int32.Parse(Screen.Text);
+                int x = Int32.Parse(console.Text);
                 errorProvider1.SetError(textBox1, "");
             }
-            catch (Exception de)
+            catch (Exception )
             {
                 errorProvider1.SetError(textBox1, "Not an integer value.");
+                Constants.MShow("");
+                
             }
         }
        
@@ -367,6 +185,20 @@ namespace Aver3
             }
         }
         #endregion
+        #region Tools
+        private void 浏览器ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Process.Start();
+            Web w = new Web();
+            w.ShowDialog();
+        }
+        private void cmdToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Cmd w = new Cmd();
+            w.ShowDialog();
+        }
+        #endregion
+
 
     }
 }
