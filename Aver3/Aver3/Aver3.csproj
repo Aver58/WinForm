@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevComponents.DotNetBar2">
+      <HintPath>..\..\..\..\桌面\DevComponents.DotNetBar2.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -51,13 +54,37 @@
     <Compile Include="Win\Cmd.Designer.cs">
       <DependentUpon>Cmd.cs</DependentUpon>
     </Compile>
-    <Compile Include="Constants.cs" />
+    <Compile Include="Common\Cons.cs" />
     <Compile Include="CThread.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win\Setting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\Setting.Designer.cs">
+      <DependentUpon>Setting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win\Setting\Custom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\Setting\Custom.Designer.cs">
+      <DependentUpon>Custom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win\Setting\Backup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\Setting\Backup.Designer.cs">
+      <DependentUpon>Backup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win\Setting\Func.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\Setting\Func.Designer.cs">
+      <DependentUpon>Func.cs</DependentUpon>
     </Compile>
     <Compile Include="Win\Web.cs">
       <SubType>Form</SubType>
@@ -71,8 +98,20 @@
     <EmbeddedResource Include="Win\Cmd.resx">
       <DependentUpon>Cmd.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\Setting.resx">
+      <DependentUpon>Setting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\Setting\Backup.resx">
+      <DependentUpon>Backup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\Setting\Custom.resx">
+      <DependentUpon>Custom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\Setting\Func.resx">
+      <DependentUpon>Func.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Win\Web.resx">
       <DependentUpon>Web.cs</DependentUpon>

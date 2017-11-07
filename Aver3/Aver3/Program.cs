@@ -14,6 +14,7 @@ namespace Aver3
         [DllImport("kernel32.dll")]
         public static extern Boolean FreeConsole();
 
+
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
@@ -79,8 +80,9 @@ namespace Aver3
             #endregion
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main());
-            //Application.Run(new Web());
+            //Application.Run(new Main());
+            Application.Run(new Setting());
+            //Application.Run(new Win.Setting.Backup());
         }
     }
    

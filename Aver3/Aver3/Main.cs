@@ -5,12 +5,66 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+
 namespace Aver3
 {
     public partial class Main : Form
     {
-        string address = "D:";//保存文件路径
+        public static bool isAutoBackup = false;
+        public static string BackupTime = "00:00";//自动备份时间
+        public static string address = "D:\\Aver";//自动保存文件路径
+        public static List<string> filesName = new List<string>();
         bool Round = false;//界面按钮测试
+
+        #region 修正输入法全角/半角的问题
+        //声明一些API函数 
+        [DllImport("imm32.dll")]
+        public static extern IntPtr ImmGetContext(IntPtr hwnd);
+        [DllImport("imm32.dll")]
+        public static extern bool ImmGetOpenStatus(IntPtr himc);
+        [DllImport("imm32.dll")]
+        public static extern bool ImmSetOpenStatus(IntPtr himc, bool b);
+        [DllImport("imm32.dll")]
+        public static extern bool ImmGetConversionStatus(IntPtr himc, ref int lpdw, ref int lpdw2);
+        [DllImport("imm32.dll")]
+        public static extern int ImmSimulateHotKey(IntPtr hwnd, int lngHotkey);
+        private const int IME_CMODE_FULLSHAPE = 0x8;
+        private const int IME_CHOTKEY_SHAPE_TOGGLE = 0x11;
+        protected override void OnActivated(EventArgs e)
+        {
+            ChangeIME();
+        }
+        void ChangeIME()//修改输入法
+        {
+            //base.OnActivated(e);
+            IntPtr HIme = ImmGetContext(this.Handle);
+            //设置“搜狗拼音”为当前输入法
+            foreach (InputLanguage item in InputLanguage.InstalledInputLanguages)
+            {
+                if (item.LayoutName.Contains("搜狗拼音"))
+                {
+                    InputLanguage.CurrentInputLanguage = item;
+                    break;
+                }
+            }
+            //如果输入法处于打开状态 
+            if (ImmGetOpenStatus(HIme))
+            {
+                int iMode = 0;
+                int iSentence = 0;
+                //检索输入法信息 
+                bool bSuccess = ImmGetConversionStatus(HIme, ref iMode, ref iSentence);
+                if (bSuccess)
+                {
+                    //如果是全角,转换成半角 
+                    if ((iMode & IME_CMODE_FULLSHAPE) > 0)
+                        ImmSimulateHotKey(this.Handle, IME_CHOTKEY_SHAPE_TOGGLE);
+                }
+            }
+        }
+        #endregion 修正输入法全角/半角的问题
         //窗体界面的初始化
         public Main()
         {
@@ -19,68 +73,9 @@ namespace Aver3
         //窗体程序的初始化Init
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+            
         }
-        #region ButtonStudy
-        private void button1_Click(object sender, EventArgs e)
-        {
-            console.Text = "";
-            #region 读取文件
-            /*
-            label1.Text = Application.StartupPath + @"\data\111.txt";
-            try
-            {
-                FileStream fs = new FileStream(Application.StartupPath + @"\data\111.txt", FileMode.Open, FileAccess.Read);//读取文件设定
-                StreamReader m_streamReader = new StreamReader(fs);//设定读写的编码//使用StreamReader类来读取文件  
-                m_streamReader.BaseStream.Seek(0, SeekOrigin.Begin);
-                //从数据流中读取每一行，直到文件的最后一行，并在angel.Text中显示出内容
-                angel.Text = "";
-                string strLine = m_streamReader.ReadLine();
-                int i = 0;
-                int j = 0;
-                string[] a = new string[] { };
-                string[] b = new string[1];
-                string[] c = new string[1];
-                while (strLine != null)
-                {
-                    a = strLine.Split('\t');   //将取得一行的数据分割成两个字符串放入Array类型的 a 中
-                    b[j] = a[i];                //将Tab前面的数据放入Array类型的 b 中
-                    c[j] = a[i + 1];            //将Tab前面的数据放入Array类型的 c 中
-                    angel.Text = b[j].ToString() + '\r' + '\n';
-                    level.Text = c[j].ToString() + '\r' + '\n';
-                    strLine = m_streamReader.ReadLine();    //读取文件中的下一行
-                    Array.Resize(ref b, b.Length + 1);
-                    Array.Resize(ref c, c.Length + 1);
-                    j = j + 1;
-                }
-                m_streamReader.Close();    //关闭此StreamReader对象
-                int t = c.Length - 1;
-                float maxNum = float.Parse(c[0]);
-                //找到b中数据最大的电平，并找到和它同行的角度
-                for (i = 1; i < t; i++)
-                {
-                    while (maxNum < float.Parse(c[i]))
-                    {
-                        maxNum = float.Parse(c[i]);
-                        int m = i;
-                        maxLevel.Text = maxNum.ToString();
-                        maxAngle.Text = b[m].ToString();
-                    }
-                }
-            }
-            catch
-            {
-                //抛出异常
-                MessageBox.Show("发生错误，请检查！");
-                return;
-            }
-            //异常检测结束
-            */
-            #endregion
-        }
-       
 
-        #endregion
         #region MenuTool
         //LoadIni读取INI文件，并将信息载入菜单
         void LoadIni()
@@ -96,7 +91,7 @@ namespace Aver3
                 ToolStripMenuItem menuItem = new ToolStripMenuItem(sr.ReadLine());
                 foreach (var item in Menu1.DropDownItems)//todo 判断有问题
                 {
-                    if (item.ToString()== sr.ReadLine()||sr.ReadLine()==null)
+                    if (item.ToString() == sr.ReadLine() || sr.ReadLine() == null)
                     {
                         //Screen.Text += item.ToString()+ "\r\n";
                         return;
@@ -144,13 +139,13 @@ namespace Aver3
                     sr.Close();
                     return;
                 }
-                
+
                 sr.Close();
                 StreamWriter sw = new StreamWriter(address + "\\Menu.ini", true);
                 sw.WriteLine(openFileDialog1.FileName);//写入INI
                 sw.Flush();
                 sw.Close();
-               
+
             }
         }
         private void 关闭ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -158,6 +153,18 @@ namespace Aver3
             this.Close();
         }
         #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            console.Text = BackupTime;
+            //FolderBrowserDialog fbd = new FolderBrowserDialog();
+            //if (fbd.ShowDialog() == DialogResult.OK)
+            //{
+            //    //根据GUID生成文件名:乱码类似：ac3b8319-13c8-4fc1-a522-bdf6bde5f00e
+            //    //File.Create(fbd.SelectedPath + "\\" + Guid.NewGuid().ToString() + ".txt");//生成文件
+            //    //Directory.CreateDirectory(fbd.SelectedPath + "\\" + Guid.NewGuid().ToString());//生成文件夹
+            //}
+        }
         protected void textBox1_Validating(object sender,CancelEventArgs e)
         {
             try
@@ -168,11 +175,8 @@ namespace Aver3
             catch (Exception )
             {
                 errorProvider1.SetError(textBox1, "Not an integer value.");
-                Constants.MShow("");
-                
             }
         }
-       
         #region Paint
         private void Main_Paint(object sender, PaintEventArgs e)
         {
@@ -197,8 +201,41 @@ namespace Aver3
             Cmd w = new Cmd();
             w.ShowDialog();
         }
+        private void settingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Setting w = new Setting();
+            w.ShowDialog();
+        }
+
         #endregion
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (isAutoBackup)
+            {
+                if (DateTime.Now.ToShortTimeString() == BackupTime)
+                {
+                    if (Directory.Exists(address+ "\\" + DateTime.Now.Month.ToString()) == false)//指定路径没有文件夹
+                    {
+                        Directory.CreateDirectory(address + "\\" + DateTime.Now.Month.ToString());//创建文件夹
+                    }
+                    AutoBackup(filesName, address); 
+                }
+            }
+        }
+        //将指定文件拷贝到备份文件夹
+        private void AutoBackup(List<string> fromFiles,string ToPath)
+        {
+            //DirectoryInfo dirInfo = new DirectoryInfo();
+            foreach (string item in fromFiles)
+            {
+                File.Copy(item, ToPath,true);
+            }
+        }
 
+        private void Main_Leave(object sender, EventArgs e)
+        {
+            //todo保存设置
+        }
     }
 }
