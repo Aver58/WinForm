@@ -10,7 +10,7 @@ namespace Aver3
     {
         public override void Func()
         {
-            Main f = new Main();
+            Form1 f = new Form1();
             f.console.Text = "2222222";
         }
         //void Main()

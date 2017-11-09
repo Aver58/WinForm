@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Aver3.Win.Setting
 {
-    public partial class Custom : Form
+    public partial class Custom : System.Windows.Forms.Form
     {
         public Custom()
         {

@@ -56,11 +56,17 @@
     </Compile>
     <Compile Include="Common\Cons.cs" />
     <Compile Include="CThread.cs" />
-    <Compile Include="Main.cs">
+    <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main.Designer.cs">
-      <DependentUpon>Main.cs</DependentUpon>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win\IPTools.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\IPTools.Designer.cs">
+      <DependentUpon>IPTools.cs</DependentUpon>
     </Compile>
     <Compile Include="Win\Setting.cs">
       <SubType>Form</SubType>
@@ -98,8 +104,11 @@
     <EmbeddedResource Include="Win\Cmd.resx">
       <DependentUpon>Cmd.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main.resx">
-      <DependentUpon>Main.cs</DependentUpon>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\IPTools.resx">
+      <DependentUpon>IPTools.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Win\Setting.resx">
       <DependentUpon>Setting.cs</DependentUpon>

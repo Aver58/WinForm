@@ -7,10 +7,12 @@ using System.IO;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Net;
+using Aver3.Win;
 
 namespace Aver3
 {
-    public partial class Main : Form
+    public partial class Form1 : Form
     {
         public static bool isAutoBackup = false;
         public static string BackupTime = "00:00";//自动备份时间
@@ -32,6 +34,7 @@ namespace Aver3
         public static extern int ImmSimulateHotKey(IntPtr hwnd, int lngHotkey);
         private const int IME_CMODE_FULLSHAPE = 0x8;
         private const int IME_CHOTKEY_SHAPE_TOGGLE = 0x11;
+
         protected override void OnActivated(EventArgs e)
         {
             ChangeIME();
@@ -66,7 +69,7 @@ namespace Aver3
         }
         #endregion 修正输入法全角/半角的问题
         //窗体界面的初始化
-        public Main()
+        public Form1()
         {
             InitializeComponent();
         }
@@ -76,7 +79,72 @@ namespace Aver3
             
         }
 
-        #region MenuTool
+   
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            console.Text = BackupTime;
+        }
+        //errorProvider错误提示
+        protected void textBox1_Validating(object sender,CancelEventArgs e)
+        {
+            try
+            {
+                int x = Int32.Parse(textBox1.Text);
+                if (x != 11)
+                {
+                    errorProvider1.SetError(textBox1, "11");
+                }
+                else
+                {
+                    errorProvider1.Clear();
+                }
+            }
+            catch (Exception)
+            {
+                errorProvider1.SetError(textBox1, "Not an integer value.");
+            }
+        }
+        #region Paint
+        private void Main_Paint(object sender, PaintEventArgs e)
+        {
+            if (Round)
+            {
+                System.Drawing.Drawing2D.GraphicsPath firstPath = new System.Drawing.Drawing2D.GraphicsPath();
+                firstPath.AddEllipse(30, 30, this.Width - 40, this.Height - 40);
+                ShowWindows(openFileDialog1.FileName);
+                this.Region = new Region(firstPath);
+            }
+        }
+        #endregion
+
+        #region AutoUpdate
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (isAutoBackup)
+            {
+                if (DateTime.Now.ToShortTimeString() == BackupTime)
+                {
+                    if (Directory.Exists(address + "\\" + DateTime.Now.Month.ToString()) == false)//指定路径没有文件夹
+                    {
+                        Directory.CreateDirectory(address + "\\" + DateTime.Now.Month.ToString());//创建文件夹
+                    }
+                    AutoBackup(filesName, address);
+                }
+            }
+        }
+        //将指定文件拷贝到备份文件夹
+        private void AutoBackup(List<string> fromFiles, string ToPath)
+        {
+            //DirectoryInfo dirInfo = new DirectoryInfo();
+            foreach (string item in fromFiles)
+            {
+                File.Copy(item, ToPath, true);
+            }
+        }
+        #endregion
+
+        #region Menu
         //LoadIni读取INI文件，并将信息载入菜单
         void LoadIni()
         {
@@ -119,7 +187,7 @@ namespace Aver3
             {
                 return;
             }
-            Form f = new Form();
+            System.Windows.Forms.Form f = new System.Windows.Forms.Form();
             f.MdiParent = this;
             f.Show();
         }
@@ -154,41 +222,6 @@ namespace Aver3
         }
         #endregion
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            console.Text = BackupTime;
-            //FolderBrowserDialog fbd = new FolderBrowserDialog();
-            //if (fbd.ShowDialog() == DialogResult.OK)
-            //{
-            //    //根据GUID生成文件名:乱码类似：ac3b8319-13c8-4fc1-a522-bdf6bde5f00e
-            //    //File.Create(fbd.SelectedPath + "\\" + Guid.NewGuid().ToString() + ".txt");//生成文件
-            //    //Directory.CreateDirectory(fbd.SelectedPath + "\\" + Guid.NewGuid().ToString());//生成文件夹
-            //}
-        }
-        protected void textBox1_Validating(object sender,CancelEventArgs e)
-        {
-            try
-            {
-                int x = Int32.Parse(console.Text);
-                errorProvider1.SetError(textBox1, "");
-            }
-            catch (Exception )
-            {
-                errorProvider1.SetError(textBox1, "Not an integer value.");
-            }
-        }
-        #region Paint
-        private void Main_Paint(object sender, PaintEventArgs e)
-        {
-            if (Round)
-            {
-                System.Drawing.Drawing2D.GraphicsPath firstPath = new System.Drawing.Drawing2D.GraphicsPath();
-                firstPath.AddEllipse(30, 30, this.Width - 40, this.Height - 40);
-                ShowWindows(openFileDialog1.FileName);
-                this.Region = new Region(firstPath);
-            }
-        }
-        #endregion
         #region Tools
         private void 浏览器ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -206,36 +239,74 @@ namespace Aver3
             Setting w = new Setting();
             w.ShowDialog();
         }
-
+        private void iP工具ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IPTools w = new IPTools();
+            w.ShowDialog();
+        }
         #endregion
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (isAutoBackup)
-            {
-                if (DateTime.Now.ToShortTimeString() == BackupTime)
-                {
-                    if (Directory.Exists(address+ "\\" + DateTime.Now.Month.ToString()) == false)//指定路径没有文件夹
-                    {
-                        Directory.CreateDirectory(address + "\\" + DateTime.Now.Month.ToString());//创建文件夹
-                    }
-                    AutoBackup(filesName, address); 
-                }
-            }
-        }
-        //将指定文件拷贝到备份文件夹
-        private void AutoBackup(List<string> fromFiles,string ToPath)
-        {
-            //DirectoryInfo dirInfo = new DirectoryInfo();
-            foreach (string item in fromFiles)
-            {
-                File.Copy(item, ToPath,true);
-            }
-        }
+        #region SendMsgSMS  Abandon
+        //private string url = "http://utf8.sms.webchinese.cn/?";
+        //private string strUid = "Uid=";
+        //private string strKey = "&key=*******************"; //这里*代表秘钥，由于从长有点麻烦，就不在窗口上输入了  
+        //private string strMob = "&smsMob=";
+        //private string strContent = "&smsText=";
+        //private void button2_Click(object sender, EventArgs e)
+        //{
+        //    if (textBox1.Text.ToString().Trim() != "" && textBox2.Text.ToString().Trim() != "" && textBox3.Text.ToString() != null)
+        //    {
+        //        url = url + strUid + textBox1.Text + strKey + strMob + textBox2.Text + strContent + textBox3.Text;
+        //        string Result = GetHtmlFromUrl(url);
 
+        //        MessageBox.Show(Result);
+        //    }
+        //}
+
+        //public string GetHtmlFromUrl(string url)
+        //{
+        //    string strRet = null;
+        //    if (url == null || url.Trim().ToString() == "")
+        //    {
+        //        return strRet;
+        //    }
+        //    string targeturl = url.Trim().ToString();
+        //    try
+        //    {
+        //        HttpWebRequest hr = (HttpWebRequest)WebRequest.Create(targeturl);
+        //        hr.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)";
+        //        hr.Method = "GET";
+        //        hr.Timeout = 30 * 60 * 1000;
+        //        WebResponse hs = hr.GetResponse();
+        //        Stream sr = hs.GetResponseStream();
+        //        StreamReader ser = new StreamReader(sr, Encoding.Default);
+        //        strRet = ser.ReadToEnd();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        strRet = null;
+        //        MessageBox.Show(ex.ToString());
+        //    }
+        //    return strRet;
+        //}
+        #endregion
+
+        //拖放文件直接打开
+        private void Main_DragEnter(object sender, DragEventArgs e)
+        {
+            Cons.DragEffect(sender, e);
+        }
+        private void Main_DragDrop(object sender, DragEventArgs e)
+        {
+            string FilePath;
+            FilePath = ((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();//这个地方得到的就是拖放的文件路径
+            Process.Start(FilePath);
+        }
         private void Main_Leave(object sender, EventArgs e)
         {
             //todo保存设置
         }
+
+      
     }
 }

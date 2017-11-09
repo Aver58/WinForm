@@ -13,45 +13,46 @@ using System.Windows.Forms;
 
 namespace Aver3
 {
-    public partial class Setting : Form
+    public partial class Setting : System.Windows.Forms.Form
     {
         private string SelectedNode = "";
 
-        public Setting(string strKeyName = "Custom")
+        public Setting()
         {
             InitializeComponent();
+            string strKeyName = "Custom";//默认
             CreateSetChild(strKeyName);
         }
 
         private void Setting_Load(object sender, EventArgs e)
         {
-
             //自动完成文本
-            textBox1.AutoCompleteCustomSource.Add(GetChildNodes(treeView1.Nodes).ToString());     //添加字段搜索
+            GetChildNodes(textBox1.AutoCompleteCustomSource,treeView1.Nodes);
         }
-        //递归获取子节点
-        TreeNode GetChildNodes(TreeNodeCollection Baba)
+        //递归获取所以子节点
+        TreeNode GetChildNodes(AutoCompleteStringCollection o ,TreeNodeCollection Baba)
         {
             foreach (TreeNode item in Baba)
             {
+                o.Add(item.Text);
                 if ((!(item.Nodes.Count == 0)))
                 {
-                    GetChildNodes(item.Nodes);
+                    GetChildNodes(o,item.Nodes);
                 }
-                return item;
             }
             return null;
         }
+        
         //遍历TreeView,查找某个节点
-        private TreeNode FindNode(TreeNode tnParent, string strValue)
+         TreeNode FindNode(TreeNode Nod, string strValue)
         {
-            if (tnParent == null)
+            if (Nod == null)
                 return null;
-            if (tnParent.Text == strValue)
-                return tnParent;
+            if (Nod.Text == strValue)
+                return Nod;
 
             TreeNode tnRet = null;
-            foreach (TreeNode tn in tnParent.Nodes)
+            foreach (TreeNode tn in Nod.Nodes)
             {
                 tnRet = FindNode(tn, strValue);
                 if (tnRet != null) break;
@@ -63,16 +64,19 @@ namespace Aver3
         //搜索功能
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            TreeNode TargetNode = null;
             foreach (TreeNode item in treeView1.Nodes)
             {
-                if (textBox1.Text == item.Text)
+                TargetNode = FindNode(item, textBox1.Text);
+                if (TargetNode != null) break;
+            }
+            if (TargetNode != null)
+            {
+                TargetNode.Checked = true;//选中效果无效-好像是AfterSelect的锅
+                treeView1.SelectedNode = TargetNode;
+                if (TargetNode.Parent != null)
                 {
-                    if (item.Parent!=null)
-                    {
-                        item.Parent.Expand();//展开
-                    }
-                    treeView1.SelectedNode = item;
-                    //item.Checked = true;//选中效果无效-好像是AfterSelect的锅
+                    TargetNode.Parent.Expand();//展开
                 }
             }
         }
@@ -89,7 +93,7 @@ namespace Aver3
 
         private void CreateSetChild(string strName)
         {
-            Form f = null;
+            System.Windows.Forms.Form f = null;
             //string strTitle = "";
             switch (strName)
             {

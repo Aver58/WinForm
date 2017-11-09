@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Aver3
 {
-    public partial class Web : Form
+    public partial class Web : System.Windows.Forms.Form
     {
         public Web()
         {

@@ -1,6 +1,6 @@
 ﻿namespace Aver3
 {
-    partial class Main
+    partial class Form1
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -39,6 +39,7 @@
             this.cmdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.浏览器ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iP工具ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -50,7 +51,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(259, 40);
+            this.button1.Location = new System.Drawing.Point(153, 40);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 27);
             this.button1.TabIndex = 17;
@@ -63,7 +64,7 @@
             this.console.Location = new System.Drawing.Point(12, 40);
             this.console.Multiline = true;
             this.console.Name = "console";
-            this.console.Size = new System.Drawing.Size(232, 25);
+            this.console.Size = new System.Drawing.Size(125, 25);
             this.console.TabIndex = 18;
             this.console.Text = "请输入命令";
             // 
@@ -74,7 +75,7 @@
             this.toolsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(464, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(664, 25);
             this.menuStrip1.TabIndex = 19;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -91,14 +92,14 @@
             // 打开ToolStripMenuItem
             // 
             this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
-            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.打开ToolStripMenuItem.Text = "打开";
             this.打开ToolStripMenuItem.Click += new System.EventHandler(this.打开ToolStripMenuItem_Click);
             // 
             // 关闭ToolStripMenuItem
             // 
             this.关闭ToolStripMenuItem.Name = "关闭ToolStripMenuItem";
-            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.关闭ToolStripMenuItem.Text = "关闭";
             this.关闭ToolStripMenuItem.Click += new System.EventHandler(this.关闭ToolStripMenuItem_Click);
             // 
@@ -107,7 +108,8 @@
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmdToolStripMenuItem,
             this.浏览器ToolStripMenuItem,
-            this.settingToolStripMenuItem});
+            this.settingToolStripMenuItem,
+            this.iP工具ToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(67, 21);
             this.toolsToolStripMenuItem.Text = "Tools(&T)";
@@ -115,23 +117,30 @@
             // cmdToolStripMenuItem
             // 
             this.cmdToolStripMenuItem.Name = "cmdToolStripMenuItem";
-            this.cmdToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.cmdToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cmdToolStripMenuItem.Text = "cmd";
             this.cmdToolStripMenuItem.Click += new System.EventHandler(this.cmdToolStripMenuItem_Click);
             // 
             // 浏览器ToolStripMenuItem
             // 
             this.浏览器ToolStripMenuItem.Name = "浏览器ToolStripMenuItem";
-            this.浏览器ToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.浏览器ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.浏览器ToolStripMenuItem.Text = "浏览器";
             this.浏览器ToolStripMenuItem.Click += new System.EventHandler(this.浏览器ToolStripMenuItem_Click);
             // 
             // settingToolStripMenuItem
             // 
             this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
-            this.settingToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.settingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.settingToolStripMenuItem.Text = "Setting";
             this.settingToolStripMenuItem.Click += new System.EventHandler(this.settingToolStripMenuItem_Click);
+            // 
+            // iP工具ToolStripMenuItem
+            // 
+            this.iP工具ToolStripMenuItem.Name = "iP工具ToolStripMenuItem";
+            this.iP工具ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.iP工具ToolStripMenuItem.Text = "IP工具";
+            this.iP工具ToolStripMenuItem.Click += new System.EventHandler(this.iP工具ToolStripMenuItem_Click);
             // 
             // openFileDialog1
             // 
@@ -145,8 +154,9 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(12, 71);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.Size = new System.Drawing.Size(116, 21);
             this.textBox1.TabIndex = 23;
+            this.textBox1.Validating += new System.ComponentModel.CancelEventHandler(this.textBox1_Validating);
             // 
             // timer1
             // 
@@ -158,18 +168,19 @@
             this.listBox1.ItemHeight = 12;
             this.listBox1.Items.AddRange(new object[] {
             "怎么在点击谷歌输入栏的时候切换输入法",
-            "注释时候：中英文互换的不便--写个VS插件"});
+            "注释时候：中英文互换的不便--写个VS插件",
+            "指纹识别是将指纹图像转换成字符串来识别"});
             this.listBox1.Location = new System.Drawing.Point(12, 98);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(440, 172);
+            this.listBox1.Size = new System.Drawing.Size(252, 172);
             this.listBox1.TabIndex = 25;
             // 
-            // Main
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.ClientSize = new System.Drawing.Size(464, 274);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(664, 390);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.console);
@@ -177,11 +188,12 @@
             this.Controls.Add(this.menuStrip1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Main";
+            this.Name = "Form1";
             this.Text = "Aver";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Main_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Main_DragEnter);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Main_Paint);
             this.Leave += new System.EventHandler(this.Main_Leave);
             this.menuStrip1.ResumeLayout(false);
@@ -208,6 +220,7 @@
         private System.Windows.Forms.ToolStripMenuItem settingToolStripMenuItem;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ToolStripMenuItem iP工具ToolStripMenuItem;
     }
 }
 
