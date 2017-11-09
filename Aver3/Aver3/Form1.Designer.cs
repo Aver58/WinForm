@@ -45,6 +45,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -106,10 +107,11 @@
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmdToolStripMenuItem,
             this.浏览器ToolStripMenuItem,
-            this.settingToolStripMenuItem,
-            this.iP工具ToolStripMenuItem});
+            this.iP工具ToolStripMenuItem,
+            this.cmdToolStripMenuItem,
+            this.sortToolStripMenuItem,
+            this.settingToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(67, 21);
             this.toolsToolStripMenuItem.Text = "Tools(&T)";
@@ -175,6 +177,13 @@
             this.listBox1.Size = new System.Drawing.Size(252, 172);
             this.listBox1.TabIndex = 25;
             // 
+            // sortToolStripMenuItem
+            // 
+            this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
+            this.sortToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sortToolStripMenuItem.Text = "Sort";
+            this.sortToolStripMenuItem.Click += new System.EventHandler(this.sortToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -221,6 +230,7 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ToolStripMenuItem iP工具ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
     }
 }
 

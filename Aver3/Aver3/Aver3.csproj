@@ -92,6 +92,12 @@
     <Compile Include="Win\Setting\Func.Designer.cs">
       <DependentUpon>Func.cs</DependentUpon>
     </Compile>
+    <Compile Include="Win\Sort.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\Sort.Designer.cs">
+      <DependentUpon>Sort.cs</DependentUpon>
+    </Compile>
     <Compile Include="Win\Web.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Win\Setting\Func.resx">
       <DependentUpon>Func.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\Sort.resx">
+      <DependentUpon>Sort.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Win\Web.resx">
       <DependentUpon>Web.cs</DependentUpon>

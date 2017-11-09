@@ -244,6 +244,11 @@ namespace Aver3
             IPTools w = new IPTools();
             w.ShowDialog();
         }
+        private void sortToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Sort w = new Sort();
+            w.ShowDialog();
+        }
         #endregion
 
         #region SendMsgSMS  Abandon
@@ -307,6 +312,6 @@ namespace Aver3
             //todo保存设置
         }
 
-      
+       
     }
 }
