@@ -16,23 +16,23 @@ namespace Aver3.Win.Setting
         public Backup()
         {
             InitializeComponent();
-            string Times = Form1.BackupTime;                           //AutoBackup的时间
+            string Times = Form1.config.BackupTime;                           //AutoBackup的时间
             dateTimePicker1.Value = DateTime.Parse(Times);
-            textBox2.Text = Form1.address;                             //Topath
-            checkBox1.Checked = Form1.isAutoBackup;
+            textBox2.Text = Form1.config.address;                             //Topath
+            checkBox1.Checked = Form1.config.isAutoBackup;
         }
 
 
         //时间检测
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            Form1.BackupTime = dateTimePicker1.Value.ToShortTimeString();
+            Form1.config.BackupTime = dateTimePicker1.Value.ToShortTimeString();
             //Application.SetSuspendState(PowerState.Hibernate, false, true);//休眠命令
         }
         //自动备份
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            Form1.isAutoBackup = checkBox1.Checked;
+            Form1.config.isAutoBackup = checkBox1.Checked;
         }
 
         //浏览文件夹--选择目标路径
@@ -41,8 +41,8 @@ namespace Aver3.Win.Setting
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             if (fbd.ShowDialog() == DialogResult.OK)
             {
-                Form1.address = fbd.SelectedPath;
-                textBox2.Text = Form1.address;
+                Form1.config.address = fbd.SelectedPath;
+                textBox2.Text = Form1.config.address;
                 //根据GUID生成文件名:乱码类似：ac3b8319-13c8-4fc1-a522-bdf6bde5f00e
                 //File.Create(fbd.SelectedPath + "\\" + Guid.NewGuid().ToString() + ".txt");//生成文件
                 //Directory.CreateDirectory(fbd.SelectedPath + "\\" + Guid.NewGuid().ToString());//生成文件夹
@@ -69,7 +69,7 @@ namespace Aver3.Win.Setting
             openFileDialog1.Filter = "cs文件|*.cs";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                Form1.filesName.Add(openFileDialog1.FileName);
+                Form1.config.filesName.Add(openFileDialog1.FileName);
                 listBox1.Items.Add(openFileDialog1.FileName);
                 //listBox1.SaveFile(Main.address + "\\Aver\\", RichTextBoxStreamType.RichText);
             }

@@ -14,11 +14,7 @@ namespace Aver3
 {
     public partial class Form1 : Form
     {
-        public static bool isAutoBackup = false;
-        public static string BackupTime = "00:00";//自动备份时间
-        public static string address = "D:\\Aver";//自动保存文件路径
-        public static List<string> filesName = new List<string>();
-        bool Round = false;//界面按钮测试
+        
 
         #region 修正输入法全角/半角的问题
         //声明一些API函数 
@@ -78,12 +74,19 @@ namespace Aver3
         {
             
         }
-
+        public class config
+        {
+            public static bool isAutoBackup = false;
+            public static string BackupTime = "00:00";//自动备份时间
+            public static string address = "D:\\Aver";//自动保存文件路径
+            public static List<string> filesName = new List<string>();
+            public static bool Round = false;//界面按钮测试
+        }
    
 
         private void button1_Click(object sender, EventArgs e)
         {
-            console.Text = BackupTime;
+            console.Text = config.BackupTime;
         }
         //errorProvider错误提示
         protected void textBox1_Validating(object sender,CancelEventArgs e)
@@ -108,7 +111,7 @@ namespace Aver3
         #region Paint
         private void Main_Paint(object sender, PaintEventArgs e)
         {
-            if (Round)
+            if (config.Round)
             {
                 System.Drawing.Drawing2D.GraphicsPath firstPath = new System.Drawing.Drawing2D.GraphicsPath();
                 firstPath.AddEllipse(30, 30, this.Width - 40, this.Height - 40);
@@ -121,15 +124,15 @@ namespace Aver3
         #region AutoUpdate
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (isAutoBackup)
+            if (config.isAutoBackup)
             {
-                if (DateTime.Now.ToShortTimeString() == BackupTime)
+                if (DateTime.Now.ToShortTimeString() == config.BackupTime)
                 {
-                    if (Directory.Exists(address + "\\" + DateTime.Now.Month.ToString()) == false)//指定路径没有文件夹
+                    if (Directory.Exists(config.address + "\\" + DateTime.Now.Month.ToString()) == false)//指定路径没有文件夹
                     {
-                        Directory.CreateDirectory(address + "\\" + DateTime.Now.Month.ToString());//创建文件夹
+                        Directory.CreateDirectory(config.address + "\\" + DateTime.Now.Month.ToString());//创建文件夹
                     }
-                    AutoBackup(filesName, address);
+                    AutoBackup(config.filesName, config.address);
                 }
             }
         }
@@ -148,10 +151,10 @@ namespace Aver3
         //LoadIni读取INI文件，并将信息载入菜单
         void LoadIni()
         {
-            StreamWriter sw = new StreamWriter(address + "\\Menu.ini", true);
+            StreamWriter sw = new StreamWriter(config.address + "\\Menu.ini", true);
             sw.Flush();
             sw.Close();
-            StreamReader sr = new StreamReader(address + "\\Menu.ini");
+            StreamReader sr = new StreamReader(config.address + "\\Menu.ini");
             int i = Menu1.DropDownItems.Count - 1;//从第2个开始载入 
             while (sr.Peek() >= 0) //sr.Peek()返回下一个可用字符，但不使用它
             {
@@ -200,7 +203,7 @@ namespace Aver3
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                StreamReader sr = new StreamReader(address + "\\Menu.ini");
+                StreamReader sr = new StreamReader(config.address + "\\Menu.ini");
                 //如果没打开文件，就不写入||如果有了就不写入
                 if (openFileDialog1.FileName == "" || sr.ReadLine() == openFileDialog1.FileName)
                 {
@@ -209,7 +212,7 @@ namespace Aver3
                 }
 
                 sr.Close();
-                StreamWriter sw = new StreamWriter(address + "\\Menu.ini", true);
+                StreamWriter sw = new StreamWriter(config.address + "\\Menu.ini", true);
                 sw.WriteLine(openFileDialog1.FileName);//写入INI
                 sw.Flush();
                 sw.Close();
