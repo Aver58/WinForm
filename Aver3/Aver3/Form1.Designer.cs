@@ -36,16 +36,17 @@
             this.打开ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关闭ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.浏览器ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iP工具ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.regex工具ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -93,14 +94,14 @@
             // 打开ToolStripMenuItem
             // 
             this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
-            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.打开ToolStripMenuItem.Text = "打开";
             this.打开ToolStripMenuItem.Click += new System.EventHandler(this.打开ToolStripMenuItem_Click);
             // 
             // 关闭ToolStripMenuItem
             // 
             this.关闭ToolStripMenuItem.Name = "关闭ToolStripMenuItem";
-            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.关闭ToolStripMenuItem.Text = "关闭";
             this.关闭ToolStripMenuItem.Click += new System.EventHandler(this.关闭ToolStripMenuItem_Click);
             // 
@@ -111,17 +112,11 @@
             this.iP工具ToolStripMenuItem,
             this.cmdToolStripMenuItem,
             this.sortToolStripMenuItem,
+            this.regex工具ToolStripMenuItem,
             this.settingToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(67, 21);
             this.toolsToolStripMenuItem.Text = "Tools(&T)";
-            // 
-            // cmdToolStripMenuItem
-            // 
-            this.cmdToolStripMenuItem.Name = "cmdToolStripMenuItem";
-            this.cmdToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.cmdToolStripMenuItem.Text = "cmd";
-            this.cmdToolStripMenuItem.Click += new System.EventHandler(this.cmdToolStripMenuItem_Click);
             // 
             // 浏览器ToolStripMenuItem
             // 
@@ -130,19 +125,33 @@
             this.浏览器ToolStripMenuItem.Text = "浏览器";
             this.浏览器ToolStripMenuItem.Click += new System.EventHandler(this.浏览器ToolStripMenuItem_Click);
             // 
-            // settingToolStripMenuItem
-            // 
-            this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
-            this.settingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.settingToolStripMenuItem.Text = "Setting";
-            this.settingToolStripMenuItem.Click += new System.EventHandler(this.settingToolStripMenuItem_Click);
-            // 
             // iP工具ToolStripMenuItem
             // 
             this.iP工具ToolStripMenuItem.Name = "iP工具ToolStripMenuItem";
             this.iP工具ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.iP工具ToolStripMenuItem.Text = "IP工具";
             this.iP工具ToolStripMenuItem.Click += new System.EventHandler(this.iP工具ToolStripMenuItem_Click);
+            // 
+            // cmdToolStripMenuItem
+            // 
+            this.cmdToolStripMenuItem.Name = "cmdToolStripMenuItem";
+            this.cmdToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cmdToolStripMenuItem.Text = "cmd";
+            this.cmdToolStripMenuItem.Click += new System.EventHandler(this.cmdToolStripMenuItem_Click);
+            // 
+            // sortToolStripMenuItem
+            // 
+            this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
+            this.sortToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sortToolStripMenuItem.Text = "Sort";
+            this.sortToolStripMenuItem.Click += new System.EventHandler(this.sortToolStripMenuItem_Click);
+            // 
+            // settingToolStripMenuItem
+            // 
+            this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
+            this.settingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settingToolStripMenuItem.Text = "Setting";
+            this.settingToolStripMenuItem.Click += new System.EventHandler(this.settingToolStripMenuItem_Click);
             // 
             // openFileDialog1
             // 
@@ -177,12 +186,12 @@
             this.listBox1.Size = new System.Drawing.Size(252, 172);
             this.listBox1.TabIndex = 25;
             // 
-            // sortToolStripMenuItem
+            // regex工具ToolStripMenuItem
             // 
-            this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
-            this.sortToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.sortToolStripMenuItem.Text = "Sort";
-            this.sortToolStripMenuItem.Click += new System.EventHandler(this.sortToolStripMenuItem_Click);
+            this.regex工具ToolStripMenuItem.Name = "regex工具ToolStripMenuItem";
+            this.regex工具ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.regex工具ToolStripMenuItem.Text = "Regex工具";
+            this.regex工具ToolStripMenuItem.Click += new System.EventHandler(this.regex工具ToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -231,6 +240,7 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ToolStripMenuItem iP工具ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem regex工具ToolStripMenuItem;
     }
 }
 

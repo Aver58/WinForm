@@ -249,6 +249,11 @@ namespace Aver3
             Sort w = new Sort();
             w.ShowDialog();
         }
+        private void regex工具ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Regex w = new Regex();
+            w.ShowDialog();
+        }
         #endregion
 
         #region SendMsgSMS  Abandon
@@ -312,6 +317,6 @@ namespace Aver3
             //todo保存设置
         }
 
-       
+      
     }
 }
