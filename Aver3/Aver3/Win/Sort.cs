@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Aver3.Win
@@ -16,6 +16,7 @@ namespace Aver3.Win
         public Sort()
         {
             InitializeComponent();
+            //CheckForIllegalCrossThreadCalls = false; //不捕获对错误线程的调用
         }
         string s;
         string[] strings;
@@ -39,17 +40,52 @@ namespace Aver3.Win
                 Nums[i] = int.Parse(strings[i]);
             }
         }
+
+        delegate void Funcs(Action fnc);
         private void button1_Click(object sender, EventArgs e)
         {
-            SortTime1(BubbleSort);
+            object obj = new Action(BubbleSort);
+            Thread t = new Thread(new ParameterizedThreadStart(SortTime1));
+            t.Start(obj);
+            //SortTime1(BubbleSort);
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            SortTime1(BubbleSort2);
+            object obj = new Action(BubbleSort2);
+            Thread t = new Thread(new ParameterizedThreadStart(SortTime1));
+            t.Start(obj);
+            //SortTime1(BubbleSort2);
         }
         private void button3_Click(object sender, EventArgs e)
         {
-            SortTime1(BubbleSort3);
+            //SortTime1(BubbleSort3);
+            using (Process pc = new Process())
+            {
+                pc.StartInfo.FileName = "notepad.exe";
+                pc.Start();
+            }
+        }
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Process[] ps;
+            ps = Process.GetProcessesByName("notepad");
+            foreach (Process item in ps)
+            {
+                item.WaitForExit(1000);
+                item.CloseMainWindow();
+            }
+            //SortTime1(SelectionSort);
+        }
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //SortTime1(InsertSort);
+        }
+        void AddItem()
+        {
+            for (int i = 0; i < Nums.Length; i++)
+            {
+                listBox1.Items.Add(Nums[i].ToString());
+            }
         }
         void SortTime(Stopwatch sw)
         {
@@ -117,13 +153,14 @@ namespace Aver3.Win
         }
 
         //传不同方法
-        void SortTime1(Action fun)
+        void SortTime1(object fun)
         {
             ReStart();
             Stopwatch timer = new Stopwatch();
             timer.Start();
             //Func< BubbleSort2>;
-            fun.Invoke();
+            Action a = fun as Action;
+            a.Invoke();
             timer.Stop();
             richTextBox1.Clear();
             richTextBox1.Text += "\r\n排序后为：\r\n";
@@ -136,10 +173,7 @@ namespace Aver3.Win
             richTextBox1.ScrollToCaret();
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            SortTime1(SelectionSort);
-        }
+       
         ///选择排序
         int min;
         void SelectionSort()
@@ -161,10 +195,7 @@ namespace Aver3.Win
             }
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            SortTime1(InsertSort);
-        }
+        
         /// <summary>
         /// 插入排序
         ///插入排序在大概有序时速度会快很多,比如:3,1,7,4,5,9,10,15,12

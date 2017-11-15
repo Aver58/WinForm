@@ -13,19 +13,18 @@ using System.Windows.Forms;
 
 namespace Aver3.Win
 {
-    public partial class Regex : Form
+    public partial class RegexTool : Form
     {
         string RegexFile = Application.StartupPath + "\\RegexExpressions.json";
         List<string> titles = new List<string>();   //Titles
         List<string> codes = new List<string>();    //RegexCodes
-        public Regex()
+        public RegexTool()
         {
             InitializeComponent();
         }
         private void Regex_Load(object sender, EventArgs e)
         {
             WriteJson();
-
             //从文件中读取对象obj的步骤：//直接从文件中反序列化到对象即可
             // 获取当前程序所在路径，并将要创建的文件命名为RegexExpressions.json 
             if (!File.Exists(RegexFile))  // 判断是否已有相同文件 
@@ -35,7 +34,6 @@ namespace Aver3.Win
             }
             try
             {
-            
                 string json = File.ReadAllText(RegexFile);  
                 object obj = JsonConvert.DeserializeObject(json);
                 List<EasyRegex> er = JsonConvert.DeserializeObject<List<EasyRegex>>(json);//反序列化成数组
@@ -112,33 +110,6 @@ namespace Aver3.Win
                     textBox2.Text = codes[i];
                 }
             }
-            //switch (treeView1.SelectedNode.Text)
-            //{
-            //    case "任何不是“XXX”的字符":
-            //        {
-            //            textBox2.Text = "[^XXX]";
-            //            break;
-            //        }
-            //    case "任何不是字母也不是数字的字符":
-            //        {
-            //            textBox2.Text = "[^a-zA-Z0-9]或者[\\w]";
-            //            break;
-            //        }
-            //    case "任何不为“^”的字符":
-            //        {
-            //            textBox2.Text = "[^\\^]";
-            //            break;
-            //        }
-            //    case "一个空字符（空格，制表符，回车或者换行）":
-            //        {
-            //            textBox2.Text = "[\\s]";
-            //            break;
-            //        }
-            //    default:
-            //        {
-            //            break;
-            //        }
-            //}
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

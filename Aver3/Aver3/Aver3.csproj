@@ -71,11 +71,11 @@
     <Compile Include="Win\IPTools.Designer.cs">
       <DependentUpon>IPTools.cs</DependentUpon>
     </Compile>
-    <Compile Include="Win\Regex.cs">
+    <Compile Include="Win\RegexTool.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Win\Regex.Designer.cs">
-      <DependentUpon>Regex.cs</DependentUpon>
+    <Compile Include="Win\RegexTool.Designer.cs">
+      <DependentUpon>RegexTool.cs</DependentUpon>
     </Compile>
     <Compile Include="Win\Setting.cs">
       <SubType>Form</SubType>
@@ -107,6 +107,18 @@
     <Compile Include="Win\Sort.Designer.cs">
       <DependentUpon>Sort.cs</DependentUpon>
     </Compile>
+    <Compile Include="Win\Spider.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\Spider.Designer.cs">
+      <DependentUpon>Spider.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win\TrojanHorse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\TrojanHorse.Designer.cs">
+      <DependentUpon>TrojanHorse.cs</DependentUpon>
+    </Compile>
     <Compile Include="Win\Web.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,8 +137,8 @@
     <EmbeddedResource Include="Win\IPTools.resx">
       <DependentUpon>IPTools.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Win\Regex.resx">
-      <DependentUpon>Regex.cs</DependentUpon>
+    <EmbeddedResource Include="Win\RegexTool.resx">
+      <DependentUpon>RegexTool.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Win\Setting.resx">
       <DependentUpon>Setting.cs</DependentUpon>
@@ -142,6 +154,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Win\Sort.resx">
       <DependentUpon>Sort.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\Spider.resx">
+      <DependentUpon>Spider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\TrojanHorse.resx">
+      <DependentUpon>TrojanHorse.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Win\Web.resx">
       <DependentUpon>Web.cs</DependentUpon>

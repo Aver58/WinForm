@@ -40,13 +40,15 @@
             this.iP工具ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.regex工具ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.spiderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.regex工具ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hackerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -113,7 +115,9 @@
             this.cmdToolStripMenuItem,
             this.sortToolStripMenuItem,
             this.regex工具ToolStripMenuItem,
-            this.settingToolStripMenuItem});
+            this.spiderToolStripMenuItem,
+            this.settingToolStripMenuItem,
+            this.hackerToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(67, 21);
             this.toolsToolStripMenuItem.Text = "Tools(&T)";
@@ -145,6 +149,20 @@
             this.sortToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sortToolStripMenuItem.Text = "Sort";
             this.sortToolStripMenuItem.Click += new System.EventHandler(this.sortToolStripMenuItem_Click);
+            // 
+            // regex工具ToolStripMenuItem
+            // 
+            this.regex工具ToolStripMenuItem.Name = "regex工具ToolStripMenuItem";
+            this.regex工具ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.regex工具ToolStripMenuItem.Text = "Regex工具";
+            this.regex工具ToolStripMenuItem.Click += new System.EventHandler(this.regex工具ToolStripMenuItem_Click);
+            // 
+            // spiderToolStripMenuItem
+            // 
+            this.spiderToolStripMenuItem.Name = "spiderToolStripMenuItem";
+            this.spiderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.spiderToolStripMenuItem.Text = "Spider";
+            this.spiderToolStripMenuItem.Click += new System.EventHandler(this.spiderToolStripMenuItem_Click);
             // 
             // settingToolStripMenuItem
             // 
@@ -186,12 +204,12 @@
             this.listBox1.Size = new System.Drawing.Size(252, 172);
             this.listBox1.TabIndex = 25;
             // 
-            // regex工具ToolStripMenuItem
+            // hackerToolStripMenuItem
             // 
-            this.regex工具ToolStripMenuItem.Name = "regex工具ToolStripMenuItem";
-            this.regex工具ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.regex工具ToolStripMenuItem.Text = "Regex工具";
-            this.regex工具ToolStripMenuItem.Click += new System.EventHandler(this.regex工具ToolStripMenuItem_Click);
+            this.hackerToolStripMenuItem.Name = "hackerToolStripMenuItem";
+            this.hackerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hackerToolStripMenuItem.Text = "hacker";
+            this.hackerToolStripMenuItem.Click += new System.EventHandler(this.hackerToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -241,6 +259,8 @@
         private System.Windows.Forms.ToolStripMenuItem iP工具ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem regex工具ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem spiderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hackerToolStripMenuItem;
     }
 }
 

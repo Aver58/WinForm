@@ -1,6 +1,6 @@
 ﻿namespace Aver3.Win
 {
-    partial class Regex
+    partial class RegexTool
     {
         /// <summary>
         /// Required designer variable.
