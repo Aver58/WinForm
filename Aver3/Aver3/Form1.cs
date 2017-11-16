@@ -10,14 +10,11 @@ using System.Runtime.InteropServices;
 using System.Net;
 using Aver3.Win;
 using Newtonsoft.Json;
-
 namespace Aver3
 {
     public partial class Form1 : Form
     {
-
         string ConfigFile = Application.StartupPath + "\\Config.ini";
-
         #region 修正输入法全角/半角的问题
         //声明一些API函数 
         [DllImport("imm32.dll")]
@@ -32,7 +29,6 @@ namespace Aver3
         public static extern int ImmSimulateHotKey(IntPtr hwnd, int lngHotkey);
         private const int IME_CMODE_FULLSHAPE = 0x8;
         private const int IME_CHOTKEY_SHAPE_TOGGLE = 0x11;
-
         protected override void OnActivated(EventArgs e)
         {
             ChangeIME();
@@ -74,7 +70,6 @@ namespace Aver3
         //窗体程序的初始化Init
         private void Form1_Load(object sender, EventArgs e)
         {
-
             if (!File.Exists(ConfigFile))  // 判断是否已有相同文件 
             {
                 //FileStream fs = new FileStream(ConfigFile, FileMode.Create, FileAccess.ReadWrite);
@@ -109,8 +104,6 @@ namespace Aver3
             public List<string> filesName { get; set; }//需要自动保存的文件名
             public bool Round { get; set; }            //界面按钮测试
         }
-   
-
         private void button1_Click(object sender, EventArgs e)
         {
             console.Text = configs.BackupTime;
@@ -173,7 +166,6 @@ namespace Aver3
             }
         }
         #endregion
-
         #region Menu
         //LoadIni读取INI文件，并将信息载入菜单
         void LoadIni()
@@ -237,13 +229,11 @@ namespace Aver3
                     sr.Close();
                     return;
                 }
-
                 sr.Close();
                 StreamWriter sw = new StreamWriter(configs.address + "\\Menu.ini", true);
                 sw.WriteLine(openFileDialog1.FileName);//写入INI
                 sw.Flush();
                 sw.Close();
-
             }
         }
         private void 关闭ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -251,7 +241,91 @@ namespace Aver3
             this.Close();
         }
         #endregion
-
+        #region SendMsgSMS  Abandon
+        //private string url = "http://utf8.sms.webchinese.cn/?";
+        //private string strUid = "Uid=";
+        //private string strKey = "&key=*******************"; //这里*代表秘钥，由于从长有点麻烦，就不在窗口上输入了  
+        //private string strMob = "&smsMob=";
+        //private string strContent = "&smsText=";
+        //private void button2_Click(object sender, EventArgs e)
+        //{
+        //    if (textBox1.Text.ToString().Trim() != "" && textBox2.Text.ToString().Trim() != "" && textBox3.Text.ToString() != null)
+        //    {
+        //        url = url + strUid + textBox1.Text + strKey + strMob + textBox2.Text + strContent + textBox3.Text;
+        //        string Result = GetHtmlFromUrl(url);
+        //        MessageBox.Show(Result);
+        //    }
+        //}
+        //public string GetHtmlFromUrl(string url)
+        //{
+        //    string strRet = null;
+        //    if (url == null || url.Trim().ToString() == "")
+        //    {
+        //        return strRet;
+        //    }
+        //    string targeturl = url.Trim().ToString();
+        //    try
+        //    {
+        //        HttpWebRequest hr = (HttpWebRequest)WebRequest.Create(targeturl);
+        //        hr.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)";
+        //        hr.Method = "GET";
+        //        hr.Timeout = 30 * 60 * 1000;
+        //        WebResponse hs = hr.GetResponse();
+        //        Stream sr = hs.GetResponseStream();
+        //        StreamReader ser = new StreamReader(sr, Encoding.Default);
+        //        strRet = ser.ReadToEnd();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        strRet = null;
+        //        MessageBox.Show(ex.ToString());
+        //    }
+        //    return strRet;
+        //}
+        #endregion
+        //拖放文件直接打开
+        private void Main_DragEnter(object sender, DragEventArgs e)
+        {
+            Cons.DragEffect(sender, e);
+        }
+        private void Main_DragDrop(object sender, DragEventArgs e)
+        {
+            string FilePath;
+            FilePath = ((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();//这个地方得到的就是拖放的文件路径
+            Process.Start(FilePath);
+        }
+        private void Main_Leave(object sender, EventArgs e)
+        {
+        }
+        public void SaveSetting()
+        {
+            //todo保存设置
+            if (!File.Exists(ConfigFile))// 判断是否已有相同文件 
+            {
+                SaveIni();
+            }
+            else
+            {
+                //如果存在，直接删掉，重新保存数据
+                File.Delete(ConfigFile);
+                SaveIni();
+            }
+        }
+         void SaveIni()
+        {
+            FileStream fs = new FileStream(ConfigFile, FileMode.Create, FileAccess.ReadWrite);
+            config c = new config
+            {
+                isAutoBackup = configs.isAutoBackup,
+                BackupTime = configs.BackupTime,
+                address = configs.address,
+                filesName = configs.filesName,
+                Round = configs.isAutoBackup
+            };
+            string json = JsonConvert.SerializeObject(c, Formatting.Indented); //有缩进输出 
+            File.WriteAllText(ConfigFile, json);                               //写入Json
+            fs.Close();
+        }
         #region Tools
         private void 浏览器ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -294,98 +368,11 @@ namespace Aver3
             TrojanHorse w = new TrojanHorse();
             w.ShowDialog();
         }
+        private void snifferToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Sniffer w = new Sniffer();
+            w.ShowDialog();
+        }
         #endregion
-
-        #region SendMsgSMS  Abandon
-        //private string url = "http://utf8.sms.webchinese.cn/?";
-        //private string strUid = "Uid=";
-        //private string strKey = "&key=*******************"; //这里*代表秘钥，由于从长有点麻烦，就不在窗口上输入了  
-        //private string strMob = "&smsMob=";
-        //private string strContent = "&smsText=";
-        //private void button2_Click(object sender, EventArgs e)
-        //{
-        //    if (textBox1.Text.ToString().Trim() != "" && textBox2.Text.ToString().Trim() != "" && textBox3.Text.ToString() != null)
-        //    {
-        //        url = url + strUid + textBox1.Text + strKey + strMob + textBox2.Text + strContent + textBox3.Text;
-        //        string Result = GetHtmlFromUrl(url);
-
-        //        MessageBox.Show(Result);
-        //    }
-        //}
-
-        //public string GetHtmlFromUrl(string url)
-        //{
-        //    string strRet = null;
-        //    if (url == null || url.Trim().ToString() == "")
-        //    {
-        //        return strRet;
-        //    }
-        //    string targeturl = url.Trim().ToString();
-        //    try
-        //    {
-        //        HttpWebRequest hr = (HttpWebRequest)WebRequest.Create(targeturl);
-        //        hr.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)";
-        //        hr.Method = "GET";
-        //        hr.Timeout = 30 * 60 * 1000;
-        //        WebResponse hs = hr.GetResponse();
-        //        Stream sr = hs.GetResponseStream();
-        //        StreamReader ser = new StreamReader(sr, Encoding.Default);
-        //        strRet = ser.ReadToEnd();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        strRet = null;
-        //        MessageBox.Show(ex.ToString());
-        //    }
-        //    return strRet;
-        //}
-        #endregion
-
-        //拖放文件直接打开
-        private void Main_DragEnter(object sender, DragEventArgs e)
-        {
-            Cons.DragEffect(sender, e);
-        }
-        private void Main_DragDrop(object sender, DragEventArgs e)
-        {
-            string FilePath;
-            FilePath = ((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();//这个地方得到的就是拖放的文件路径
-            Process.Start(FilePath);
-        }
-        private void Main_Leave(object sender, EventArgs e)
-        {
-            
-        }
-        public void SaveSetting()
-        {
-            //todo保存设置
-            if (!File.Exists(ConfigFile))// 判断是否已有相同文件 
-            {
-                SaveIni();
-            }
-            else
-            {
-                //如果存在，直接删掉，重新保存数据
-                File.Delete(ConfigFile);
-                SaveIni();
-            }
-        }
-         void SaveIni()
-        {
-            FileStream fs = new FileStream(ConfigFile, FileMode.Create, FileAccess.ReadWrite);
-            config c = new config
-            {
-                isAutoBackup = configs.isAutoBackup,
-                BackupTime = configs.BackupTime,
-                address = configs.address,
-                filesName = configs.filesName,
-                Round = configs.isAutoBackup
-            };
-            string json = JsonConvert.SerializeObject(c, Formatting.Indented); //有缩进输出 
-            File.WriteAllText(ConfigFile, json);                               //写入Json
-            fs.Close();
-        }
-
-      
     }
 }

