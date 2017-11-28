@@ -84,8 +84,8 @@ namespace Aver3
             //Application.Run(new Cmd());
 
             //Application.Run(new Win.Regex());
-            //Application.Run(new Win.Sort());
-            Application.Run(new Win.Sniffer());
+            Application.Run(new Win.Astar());
+            //Application.Run(new Win.Sniffer());
             //Application.Run(new Win.Setting.Backup());
         }
     }

@@ -11,7 +11,7 @@ namespace Aver3
         public override void Func()
         {
             Form1 f = new Form1();
-            f.console.Text = "2222222";
+            //f.console.Text = "2222222";
         }
         //void Main()
         //{

@@ -10,6 +10,11 @@ using System.Runtime.InteropServices;
 using System.Net;
 using Aver3.Win;
 using Newtonsoft.Json;
+using System.Linq;
+using System.Data;
+using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
+
 namespace Aver3
 {
     public partial class Form1 : Form
@@ -67,6 +72,10 @@ namespace Aver3
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+        }
         //窗体程序的初始化Init
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -75,7 +84,6 @@ namespace Aver3
                 //FileStream fs = new FileStream(ConfigFile, FileMode.Create, FileAccess.ReadWrite);
                 //fs.Close();
                 //不存在文件先不处理
-                Console.WriteLine(111);
             }
             else
             {
@@ -104,30 +112,8 @@ namespace Aver3
             public List<string> filesName { get; set; }//需要自动保存的文件名
             public bool Round { get; set; }            //界面按钮测试
         }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            console.Text = configs.BackupTime;
-        }
-        //errorProvider错误提示
-        protected void textBox1_Validating(object sender,CancelEventArgs e)
-        {
-            try
-            {
-                int x = Int32.Parse(textBox1.Text);
-                if (x != 11)
-                {
-                    errorProvider1.SetError(textBox1, "11");
-                }
-                else
-                {
-                    errorProvider1.Clear();
-                }
-            }
-            catch (Exception)
-            {
-                errorProvider1.SetError(textBox1, "Not an integer value.");
-            }
-        }
+        config configs = new config();
+
         #region Paint
         private void Main_Paint(object sender, PaintEventArgs e)
         {
@@ -140,7 +126,6 @@ namespace Aver3
             }
         }
         #endregion
-        config configs = new config();
         #region AutoUpdate
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -294,9 +279,6 @@ namespace Aver3
             FilePath = ((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();//这个地方得到的就是拖放的文件路径
             Process.Start(FilePath);
         }
-        private void Main_Leave(object sender, EventArgs e)
-        {
-        }
         public void SaveSetting()
         {
             //todo保存设置
@@ -373,6 +355,37 @@ namespace Aver3
             Sniffer w = new Sniffer();
             w.ShowDialog();
         }
+
+        private void aToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Astar w = new Astar();
+            w.ShowDialog();
+        }
         #endregion
+
+        #region MySQL
+        //try
+        //{
+        //    string constr = "server=localhost;User Id=root;password=op90--;Database=test";
+        //    MySqlConnection mycon = new MySqlConnection(constr);
+        //    mycon.Open();
+        //    MySqlCommand cmd = new MySqlCommand("SELECT * FROM test", mycon);
+        //    MySqlDataReader reader = cmd.ExecuteReader();
+        //    while (reader.Read())
+        //    {
+        //        listBox1.Items.Add(reader.GetString(reader.GetOrdinal("Name")));
+        //    }
+        //    mycon.Close();
+        //}
+        //catch (Exception ex)
+        //{
+        //    MessageBox.Show(ex.Message);
+        //}
+        #endregion
+        //Linq
+        //int i = (from a in book where a.Equals(2) select a).First();
+
+
+
     }
 }

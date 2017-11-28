@@ -41,52 +41,61 @@ namespace Aver3.Win
             }
         }
 
-        delegate void Funcs(Action fnc);
         private void button1_Click(object sender, EventArgs e)
         {
-            object obj = new Action(BubbleSort);
-            Thread t = new Thread(new ParameterizedThreadStart(SortTime1));
-            t.Start(obj);
+            //线程使用
+            //Thread t = new Thread(new ParameterizedThreadStart(SortTime1));
+            richTextBox1.Clear();
+            Thread t = new Thread(()=> {
+                for (int i = 0; i < 10; i++)
+                {
+                    if (richTextBox1.InvokeRequired)
+                    {
+                        //invoke的第一个参数返回void的委托
+                        //第二个参数是给委托传参
+                        richTextBox1.Invoke(new Action<string>(s=> { richTextBox1.AppendText(s); }),i.ToString());
+                    }
+                    Thread.Sleep(1000);
+                }
+            });
+            t.Start();
+
+            //异步调用--应该是在输出的时候，异步显示
+            //Funcs f = SortTime1;
+            //IAsyncResult result = f.BeginInvoke(BubbleSort, null, null);
+            //第二个参数是回调函数
+            //第三个参数是给AsyncState赋值、可以是任何Object
+            //同时执行其他程序
+
+            //获取异步结果
+            //var end = f.EndInvoke(result);//如果是数据之类的显示出来就好
+
+
+
             //SortTime1(BubbleSort);
         }
+        ////回调函数
+        //void Result(IAsyncResult a)
+        //{
+        //    //return f.
+        //}
         private void button2_Click(object sender, EventArgs e)
         {
-            object obj = new Action(BubbleSort2);
-            Thread t = new Thread(new ParameterizedThreadStart(SortTime1));
-            t.Start(obj);
-            //SortTime1(BubbleSort2);
+            SortTime1(BubbleSort2);
         }
         private void button3_Click(object sender, EventArgs e)
         {
-            //SortTime1(BubbleSort3);
-            using (Process pc = new Process())
-            {
-                pc.StartInfo.FileName = "notepad.exe";
-                pc.Start();
-            }
+            SortTime1(BubbleSort3);
         }
         private void button4_Click(object sender, EventArgs e)
         {
-            Process[] ps;
-            ps = Process.GetProcessesByName("notepad");
-            foreach (Process item in ps)
-            {
-                item.WaitForExit(1000);
-                item.CloseMainWindow();
-            }
-            //SortTime1(SelectionSort);
+            SortTime1(SelectionSort);
         }
         private void button5_Click(object sender, EventArgs e)
         {
-            //SortTime1(InsertSort);
+            SortTime1(InsertSort);
         }
-        void AddItem()
-        {
-            for (int i = 0; i < Nums.Length; i++)
-            {
-                listBox1.Items.Add(Nums[i].ToString());
-            }
-        }
+      
         void SortTime(Stopwatch sw)
         {
             richTextBox1.Clear();
@@ -153,7 +162,7 @@ namespace Aver3.Win
         }
 
         //传不同方法
-        void SortTime1(object fun)
+        void SortTime1(Action fun)
         {
             ReStart();
             Stopwatch timer = new Stopwatch();
