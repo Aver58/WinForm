@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Aver3.Win
@@ -41,44 +42,58 @@ namespace Aver3.Win
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //线程使用
-            //Thread t = new Thread(new ParameterizedThreadStart(SortTime1));
-            richTextBox1.Clear();
-            Thread t = new Thread(()=> {
-                for (int i = 0; i < 10; i++)
-                {
-                    if (richTextBox1.InvokeRequired)
-                    {
-                        //invoke的第一个参数返回void的委托
-                        //第二个参数是给委托传参
-                        richTextBox1.Invoke(new Action<string>(s=> { richTextBox1.AppendText(s); }),i.ToString());
-                    }
-                    Thread.Sleep(1000);
-                }
-            });
-            t.Start();
+        #region 线程学习
+        //1.带参数的线程使用
+        //Thread t = new Thread(new ParameterizedThreadStart(SortTime1));
+        //2.Invoke已经lamda表达式使用
+        //richTextBox1.Clear();
+        //Thread t = new Thread(()=> {
+        //    for (int i = 0; i < 10; i++)
+        //    {
+        //        if (richTextBox1.InvokeRequired)
+        //        {
+        //            //invoke的第一个参数返回void的委托
+        //            //第二个参数是给委托传参
+        //            richTextBox1.Invoke(new Action<string>(s=> { richTextBox1.AppendText(s); }),i.ToString());
+        //        }
+        //        Thread.Sleep(1000);
+        //    }
+        //});
+        //t.Start();
 
-            //异步调用--应该是在输出的时候，异步显示
-            //Funcs f = SortTime1;
-            //IAsyncResult result = f.BeginInvoke(BubbleSort, null, null);
-            //第二个参数是回调函数
-            //第三个参数是给AsyncState赋值、可以是任何Object
-            //同时执行其他程序
+        //3.异步调用--应该是在输出的时候，异步显示
+        //Funcs f = SortTime1;
+        //IAsyncResult result = f.BeginInvoke(BubbleSort, null, null);
+        //第二个参数是回调函数
+        //第三个参数是给AsyncState赋值、可以是任何Object
+        //同时执行其他程序
 
-            //获取异步结果
-            //var end = f.EndInvoke(result);//如果是数据之类的显示出来就好
+        //获取异步结果
+        //var end = f.EndInvoke(result);//如果是数据之类的显示出来就好
 
-
-
-            //SortTime1(BubbleSort);
-        }
-        ////回调函数
+        //回调函数
         //void Result(IAsyncResult a)
         //{
         //    //return f.
         //}
+        //void PoolTest(object state) { }
+        //4.线程池的使用
+        //ThreadPool.QueueUserWorkItem(PoolTest, s);//开启一个线程，适用于小任务
+
+
+        //5.任务的使用，对线程的封装
+        //Task t = new Task(SortTime);
+        //TaskFactory tf = new TaskFactory(SortTime);
+        //Task t = new Task(BubbleSort2);
+        //Task t2 = t.ContinueWith(BubbleSort3);
+        #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            SortTime1(BubbleSort);
+        }
+        
         private void button2_Click(object sender, EventArgs e)
         {
             SortTime1(BubbleSort2);
@@ -118,8 +133,8 @@ namespace Aver3.Win
                     if (Nums[j] > Nums[j + 1])
                     {
                         int temp = Nums[j];
-                        Nums[j + 1] = Nums[j];
-                        Nums[j] = temp;
+                        Nums[j] = Nums[j + 1];
+                        Nums[j+1] = temp;
                     }
                 }
             }
@@ -134,8 +149,8 @@ namespace Aver3.Win
                     if (Nums[j] > Nums[j + 1])
                     {
                         int temp = Nums[j];
-                        Nums[j + 1] = Nums[j];
-                        Nums[j] = temp;
+                        Nums[j] = Nums[j + 1];
+                        Nums[j + 1] = temp;
                     }
                 }
             }
@@ -158,9 +173,35 @@ namespace Aver3.Win
                     }
                 }
             }
-            //return list;
         }
+        //尝试改写泛型
+        void CommonSort<T>(T[] list,Func<T,T,bool> fun)
+        {
+            for (int i = 0; i < list.Length - 1; i++)
+            {
+                for (int j = i + 1; j < list.Length; j++)
+                {
+                    if (fun(list[i],list[j])) //如果第二个小于第一个数
+                    {
+                        //交换两个数的位置，在这里你也可以单独写一个交换方法，在此调用就行了
+                        T temp = list[i]; //把大的数放在一个临时存储位置
+                        list[i] = list[j]; //然后把小的数赋给前一个，保证每趟排序前面的最小
+                        list[j] = temp; //然后把临时位置的那个大数赋给后一个
+                    }
+                }
+            }
+        }
+        Func<int, bool> fun = x => { return true; };
+        //泛型使用实例
+        class person
+        {
+            public int age { get; set; }
 
+            public bool Compare(int x, int y)
+            {
+                return x > y ? true : false;
+            }
+        }
         //传不同方法
         void SortTime1(Action fun)
         {

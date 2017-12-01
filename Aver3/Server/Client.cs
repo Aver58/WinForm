@@ -39,8 +39,6 @@ namespace Server
                     serverSocket.Close();
                     break;
                 }
-                Console.WriteLine("开始监听");
-
                 int length = serverSocket.Receive(data);
                 message = Encoding.UTF8.GetString(data, 0, length);
 

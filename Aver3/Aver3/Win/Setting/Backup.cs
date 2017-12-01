@@ -13,7 +13,7 @@ namespace Aver3.Win.Setting
 {
     public partial class Backup : System.Windows.Forms.Form
     {
-        Form1.config configs = new Form1.config();
+        config configs = new config();
         public Backup()
         {
             InitializeComponent();
@@ -70,7 +70,7 @@ namespace Aver3.Win.Setting
             openFileDialog1.Filter = "cs文件|*.cs";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                configs.filesName.Add(openFileDialog1.FileName);
+                configs.backupFile.Add(openFileDialog1.FileName);
                 listBox1.Items.Add(openFileDialog1.FileName);
                 //listBox1.SaveFile(Main.address + "\\Aver\\", RichTextBoxStreamType.RichText);
             }

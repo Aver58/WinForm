@@ -42,12 +42,11 @@
             this.spiderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hackerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.aToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -106,58 +105,65 @@
             // 浏览器ToolStripMenuItem
             // 
             this.浏览器ToolStripMenuItem.Name = "浏览器ToolStripMenuItem";
-            this.浏览器ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.浏览器ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.浏览器ToolStripMenuItem.Text = "浏览器";
             this.浏览器ToolStripMenuItem.Click += new System.EventHandler(this.浏览器ToolStripMenuItem_Click);
             // 
             // iP工具ToolStripMenuItem
             // 
             this.iP工具ToolStripMenuItem.Name = "iP工具ToolStripMenuItem";
-            this.iP工具ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.iP工具ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.iP工具ToolStripMenuItem.Text = "IP工具";
             this.iP工具ToolStripMenuItem.Click += new System.EventHandler(this.iP工具ToolStripMenuItem_Click);
             // 
             // cmdToolStripMenuItem
             // 
             this.cmdToolStripMenuItem.Name = "cmdToolStripMenuItem";
-            this.cmdToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cmdToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.cmdToolStripMenuItem.Text = "cmd";
             this.cmdToolStripMenuItem.Click += new System.EventHandler(this.cmdToolStripMenuItem_Click);
             // 
             // sortToolStripMenuItem
             // 
             this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
-            this.sortToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sortToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.sortToolStripMenuItem.Text = "Sort";
             this.sortToolStripMenuItem.Click += new System.EventHandler(this.sortToolStripMenuItem_Click);
             // 
             // regex工具ToolStripMenuItem
             // 
             this.regex工具ToolStripMenuItem.Name = "regex工具ToolStripMenuItem";
-            this.regex工具ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.regex工具ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.regex工具ToolStripMenuItem.Text = "Regex工具";
             this.regex工具ToolStripMenuItem.Click += new System.EventHandler(this.regex工具ToolStripMenuItem_Click);
             // 
             // spiderToolStripMenuItem
             // 
             this.spiderToolStripMenuItem.Name = "spiderToolStripMenuItem";
-            this.spiderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.spiderToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.spiderToolStripMenuItem.Text = "Spider";
             this.spiderToolStripMenuItem.Click += new System.EventHandler(this.spiderToolStripMenuItem_Click);
             // 
             // settingToolStripMenuItem
             // 
             this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
-            this.settingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settingToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.settingToolStripMenuItem.Text = "Setting";
             this.settingToolStripMenuItem.Click += new System.EventHandler(this.settingToolStripMenuItem_Click);
             // 
             // hackerToolStripMenuItem
             // 
             this.hackerToolStripMenuItem.Name = "hackerToolStripMenuItem";
-            this.hackerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hackerToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.hackerToolStripMenuItem.Text = "hacker";
             this.hackerToolStripMenuItem.Click += new System.EventHandler(this.hackerToolStripMenuItem_Click);
+            // 
+            // aToolStripMenuItem
+            // 
+            this.aToolStripMenuItem.Name = "aToolStripMenuItem";
+            this.aToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.aToolStripMenuItem.Text = "A*";
+            this.aToolStripMenuItem.Click += new System.EventHandler(this.aToolStripMenuItem_Click);
             // 
             // openFileDialog1
             // 
@@ -167,35 +173,24 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(258, 37);
+            this.button1.Location = new System.Drawing.Point(257, 25);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 21;
-            this.button1.Text = "button1";
+            this.button1.Text = "保存";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // listBox1
+            // label1
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(12, 28);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(222, 160);
-            this.listBox1.TabIndex = 22;
-            // 
-            // aToolStripMenuItem
-            // 
-            this.aToolStripMenuItem.Name = "aToolStripMenuItem";
-            this.aToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.aToolStripMenuItem.Text = "A*";
-            this.aToolStripMenuItem.Click += new System.EventHandler(this.aToolStripMenuItem_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "label1";
             // 
             // Form1
             // 
@@ -203,7 +198,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(378, 297);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.menuStrip1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -234,15 +229,14 @@
         private System.Windows.Forms.ToolStripMenuItem 浏览器ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cmdToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingToolStripMenuItem;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripMenuItem iP工具ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem regex工具ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem spiderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hackerToolStripMenuItem;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ToolStripMenuItem aToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
     }
 }
 

@@ -98,6 +98,7 @@
     <Compile Include="Win\Setting.Designer.cs">
       <DependentUpon>Setting.cs</DependentUpon>
     </Compile>
+    <Compile Include="Win\Setting\config.cs" />
     <Compile Include="Win\Setting\Custom.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,12 +117,20 @@
     <Compile Include="Win\Setting\Func.Designer.cs">
       <DependentUpon>Func.cs</DependentUpon>
     </Compile>
+    <Compile Include="Win\Setting\IniFile.cs" />
     <Compile Include="Win\Sniffer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Win\Sniffer.Designer.cs">
       <DependentUpon>Sniffer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Win\Sockets\Client.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Win\Sockets\Client.Designer.cs">
+      <DependentUpon>Client.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win\Sockets\Server.cs" />
     <Compile Include="Win\Sort.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,7 +157,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestThread.cs" />
     <EmbeddedResource Include="Win\Astar.resx">
       <DependentUpon>Astar.cs</DependentUpon>
     </EmbeddedResource>
@@ -178,6 +186,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Win\Sniffer.resx">
       <DependentUpon>Sniffer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win\Sockets\Client.resx">
+      <DependentUpon>Client.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Win\Sort.resx">
       <DependentUpon>Sort.cs</DependentUpon>

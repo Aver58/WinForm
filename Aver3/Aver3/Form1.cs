@@ -1,7 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
@@ -9,17 +6,15 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Net;
 using Aver3.Win;
-using Newtonsoft.Json;
 using System.Linq;
-using System.Data;
-using System.Data.SqlClient;
-using MySql.Data.MySqlClient;
+using Aver3.Win.Setting;
 
 namespace Aver3
 {
     public partial class Form1 : Form
     {
-        string ConfigFile = Application.StartupPath + "\\Config.ini";
+        config configs = new config();
+        
         #region 修正输入法全角/半角的问题
         //声明一些API函数 
         [DllImport("imm32.dll")]
@@ -34,6 +29,8 @@ namespace Aver3
         public static extern int ImmSimulateHotKey(IntPtr hwnd, int lngHotkey);
         private const int IME_CMODE_FULLSHAPE = 0x8;
         private const int IME_CHOTKEY_SHAPE_TOGGLE = 0x11;
+
+
         protected override void OnActivated(EventArgs e)
         {
             ChangeIME();
@@ -75,90 +72,42 @@ namespace Aver3
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Type t = this.GetType();
+            label1.Text = t.Name;
         }
+     
+       
         //窗体程序的初始化Init
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (!File.Exists(ConfigFile))  // 判断是否已有相同文件 
-            {
-                //FileStream fs = new FileStream(ConfigFile, FileMode.Create, FileAccess.ReadWrite);
-                //fs.Close();
-                //不存在文件先不处理
-            }
-            else
-            {
-                try//读取文件、修改值、保存
-                {
-                    string json = File.ReadAllText(ConfigFile);
-                    object obj = JsonConvert.DeserializeObject(json);
-                    config c = JsonConvert.DeserializeObject<config>(json);//反序列化成数组
-                         configs.isAutoBackup = c.isAutoBackup;
-                         configs.BackupTime = c.BackupTime;
-                         configs.address = c.address;
-                         configs.filesName = c.filesName;
-                         configs.Round = c.Round;
-                }
-                catch (Exception d)
-                {
-                    MessageBox.Show(d.Message);
-                }
-            }
+            //if (!File.Exists(ConfigFile))  // 判断是否已有相同文件 
+            //{
+            //    //FileStream fs = new FileStream(ConfigFile, FileMode.Create, FileAccess.ReadWrite);
+            //    //fs.Close();
+            //    //不存在文件先不处理
+            //}
+            //else
+            //{
+            //    
+            //}
         }
-        public class config
-        {
-            public bool isAutoBackup { get; set; }
-            public string BackupTime { get; set; }     //自动备份时间
-            public string address { get; set; }        //自动保存文件路径
-            public List<string> filesName { get; set; }//需要自动保存的文件名
-            public bool Round { get; set; }            //界面按钮测试
-        }
-        config configs = new config();
-
+        
         #region Paint
         private void Main_Paint(object sender, PaintEventArgs e)
         {
-            if (configs.Round)
-            {
-                System.Drawing.Drawing2D.GraphicsPath firstPath = new System.Drawing.Drawing2D.GraphicsPath();
-                firstPath.AddEllipse(30, 30, this.Width - 40, this.Height - 40);
-                ShowWindows(openFileDialog1.FileName);
-                this.Region = new Region(firstPath);
-            }
+            //System.Drawing.Drawing2D.GraphicsPath firstPath = new System.Drawing.Drawing2D.GraphicsPath();
+            //firstPath.AddEllipse(30, 30, this.Width - 40, this.Height - 40);
+            //ShowWindows(openFileDialog1.FileName);
+            //this.Region = new Region(firstPath);
         }
         #endregion
-        #region AutoUpdate
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (configs.isAutoBackup)
-            {
-                if (DateTime.Now.ToShortTimeString() == configs.BackupTime)
-                {
-                    if (Directory.Exists(configs.address + "\\" + DateTime.Now.Month.ToString()) == false)//指定路径没有文件夹
-                    {
-                        Directory.CreateDirectory(configs.address + "\\" + DateTime.Now.Month.ToString());//创建文件夹
-                    }
-                    AutoBackup(configs.filesName, configs.address);
-                }
-            }
-        }
-        //将指定文件拷贝到备份文件夹
-        private void AutoBackup(List<string> fromFiles, string ToPath)
-        {
-            //DirectoryInfo dirInfo = new DirectoryInfo();
-            foreach (string item in fromFiles)
-            {
-                File.Copy(item, ToPath, true);
-            }
-        }
-        #endregion
+
+ 
         #region Menu
         //LoadIni读取INI文件，并将信息载入菜单
-        void LoadIni()
+        void Loadini()
         {
-            StreamWriter sw = new StreamWriter(configs.address + "\\Menu.ini", true);
-            sw.Flush();
-            sw.Close();
-            StreamReader sr = new StreamReader(configs.address + "\\Menu.ini");
+            StreamReader sr = new StreamReader(IniFile.AppDirectory + "\\Menu.ini");
             int i = Menu1.DropDownItems.Count - 1;//从第2个开始载入 
             while (sr.Peek() >= 0) //sr.Peek()返回下一个可用字符，但不使用它
             {
@@ -194,20 +143,19 @@ namespace Aver3
             {
                 return;
             }
-            System.Windows.Forms.Form f = new System.Windows.Forms.Form();
+            Form f = new Form();
             f.MdiParent = this;
             f.Show();
         }
         private void MenuItem_Click(object sender, EventArgs e)
         {
-            LoadIni();
             //ShowWindows(openFileDialog1.FileName);
         }
         private void 打开ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                StreamReader sr = new StreamReader(configs.address + "\\Menu.ini");
+                StreamReader sr = new StreamReader(IniFile.AppDirectory + "\\Menu.ini");
                 //如果没打开文件，就不写入||如果有了就不写入
                 if (openFileDialog1.FileName == "" || sr.ReadLine() == openFileDialog1.FileName)
                 {
@@ -215,7 +163,7 @@ namespace Aver3
                     return;
                 }
                 sr.Close();
-                StreamWriter sw = new StreamWriter(configs.address + "\\Menu.ini", true);
+                StreamWriter sw = new StreamWriter(IniFile.AppDirectory + "\\Menu.ini", true);
                 sw.WriteLine(openFileDialog1.FileName);//写入INI
                 sw.Flush();
                 sw.Close();
@@ -226,6 +174,7 @@ namespace Aver3
             this.Close();
         }
         #endregion
+
         #region SendMsgSMS  Abandon
         //private string url = "http://utf8.sms.webchinese.cn/?";
         //private string strUid = "Uid=";
@@ -279,35 +228,8 @@ namespace Aver3
             FilePath = ((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();//这个地方得到的就是拖放的文件路径
             Process.Start(FilePath);
         }
-        public void SaveSetting()
-        {
-            //todo保存设置
-            if (!File.Exists(ConfigFile))// 判断是否已有相同文件 
-            {
-                SaveIni();
-            }
-            else
-            {
-                //如果存在，直接删掉，重新保存数据
-                File.Delete(ConfigFile);
-                SaveIni();
-            }
-        }
-         void SaveIni()
-        {
-            FileStream fs = new FileStream(ConfigFile, FileMode.Create, FileAccess.ReadWrite);
-            config c = new config
-            {
-                isAutoBackup = configs.isAutoBackup,
-                BackupTime = configs.BackupTime,
-                address = configs.address,
-                filesName = configs.filesName,
-                Round = configs.isAutoBackup
-            };
-            string json = JsonConvert.SerializeObject(c, Formatting.Indented); //有缩进输出 
-            File.WriteAllText(ConfigFile, json);                               //写入Json
-            fs.Close();
-        }
+     
+
         #region Tools
         private void 浏览器ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -362,7 +284,7 @@ namespace Aver3
             w.ShowDialog();
         }
         #endregion
-
+       
         #region MySQL
         //try
         //{

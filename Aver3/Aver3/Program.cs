@@ -4,6 +4,8 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Net.Sockets;
+using System.Net;
 
 namespace Aver3
 {
@@ -21,7 +23,7 @@ namespace Aver3
         [STAThread]
         static void Main()
         {
-#region CMD尝试
+            #region CMD尝试
             /*
 #if DEBUG
             AllocConsole();
@@ -80,11 +82,39 @@ namespace Aver3
             #endregion
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            #region Socket
+            //Socket connectedClient;         //接收到连接上的客户端
+            ////List<Socket> clientList = new List<Socket>();//存放连上的socket
+
+            ////1.创建客户端
+            //Socket tcpServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            ////2.发起连接请求
+            //IPAddress ip = IPAddress.Parse("192.168.1.8");
+            //int port = 8080;
+            //EndPoint endPoint = new IPEndPoint(ip, port);//IPEndPoint对IP和端口进行封装
+            //tcpServer.Bind(endPoint);//向系统申请可用的IP和端口进行通信
+            ////3.开始监听
+            //tcpServer.Listen(100); //挂起连接队列的最大长度。
+            //Console.WriteLine("服务器已开启，等待连接。。。");
+
+            ////while (true)
+            ////{
+            //    //4.接受客户端的连接Socket,
+            //    //暂停当前线程，开始等待，直到有客户端连接进来
+            //    connectedClient = tcpServer.Accept();
+            //    Console.WriteLine("已有一个客户端连接到该服务器。。。");
+                //clientList.Add(connectedClient);
+            //}
+            #endregion
+            //Win.Sockets.Server s = new Win.Sockets.Server();
+            //s.StartServer();
+            Application.Run(new Win.Sockets.Client());
+
             //Application.Run(new Form1());
             //Application.Run(new Cmd());
 
-            //Application.Run(new Win.Regex());
-            Application.Run(new Win.Astar());
+            //Application.Run(new Win.Sort());
+            //Application.Run(new Win.Astar());
             //Application.Run(new Win.Sniffer());
             //Application.Run(new Win.Setting.Backup());
         }
