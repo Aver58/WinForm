@@ -80,8 +80,10 @@ namespace Aver3
     }
     */
             #endregion
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             #region Socket
             //Socket connectedClient;         //接收到连接上的客户端
             ////List<Socket> clientList = new List<Socket>();//存放连上的socket
@@ -103,14 +105,15 @@ namespace Aver3
             //    //暂停当前线程，开始等待，直到有客户端连接进来
             //    connectedClient = tcpServer.Accept();
             //    Console.WriteLine("已有一个客户端连接到该服务器。。。");
-                //clientList.Add(connectedClient);
+            //clientList.Add(connectedClient);
             //}
             #endregion
+
             //Win.Sockets.Server s = new Win.Sockets.Server();
             //s.StartServer();
-            Application.Run(new Win.Sockets.Client());
+            //Application.Run(new Win.Sockets.Client());
 
-            //Application.Run(new Form1());
+            Application.Run(new Form1());
             //Application.Run(new Cmd());
 
             //Application.Run(new Win.Sort());

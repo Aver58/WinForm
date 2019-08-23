@@ -1,0 +1,70 @@
+[
+  {
+    "Titles": "任何不是“XXX”的字符",
+    "RegexCode": "[^XXX]"
+  },
+  {
+    "Titles": "任何不是字母也不是数字的字符",
+    "RegexCode": "[^a-zA-Z0-9]或者[\\W]"
+  },
+  {
+    "Titles": "任何不为“^”的字符",
+    "RegexCode": "[^\\^]"
+  },
+  {
+    "Titles": "任何一个非数字字符",
+    "RegexCode": "\\D或者[^0-9]"
+  },
+  {
+    "Titles": "XX和XX中间夹着任何一个字符",
+    "RegexCode": "XX.XX"
+  },
+  {
+    "Titles": "重复字符XX{个数}",
+    "RegexCode": "XX{n}"
+  },
+  {
+    "Titles": "重复字符XX{个数，个数}",
+    "RegexCode": "XX{n,m}"
+  },
+  {
+    "Titles": "一个空字符（空格，制表符，回车或者换行）",
+    "RegexCode": "[\\s]"
+  },
+  {
+    "Titles": "一个空字符（空格，制表符，回车或者换行）",
+    "RegexCode": "[\\s]反义词是：\\S表示匹配一个非空字符"
+  },
+  {
+    "Titles": "找到双引号,其中字符串可能包含任意个字符",
+    "RegexCode": " \".*\" "
+  },
+  {
+    "Titles": "一个空行",
+    "RegexCode": " ^& "
+  },
+  {
+    "Titles": "在一对双引号中间不再包含其他的双引号",
+    "RegexCode": " \"[^\"]*\" "
+  },
+  {
+    "Titles": "匹配长度为73的一行",
+    "RegexCode": " ^.{73,}$ "
+  },
+  {
+    "Titles": "匹配长度为73的一行",
+    "RegexCode": " ^.{73,}$ "
+  },
+  {
+    "Titles": "任何不是“XXX”的字符",
+    "RegexCode": "[^XXX]"
+  },
+  {
+    "Titles": "任何不是“XXX”的字符",
+    "RegexCode": "[^XXX]"
+  },
+  {
+    "Titles": "任何不是“XXX”的字符",
+    "RegexCode": "[^XXX]"
+  }
+]

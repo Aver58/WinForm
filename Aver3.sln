@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aver3", "Aver3\Aver3.csproj", "{0847512E-88B8-433D-A9FA-ADD5E2423E28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{CA00A7E9-E14E-4D30-BFB5-B61255D51D8A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketServer", "Server\SocketServer.csproj", "{CA00A7E9-E14E-4D30-BFB5-B61255D51D8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
